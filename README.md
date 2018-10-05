@@ -1,7 +1,7 @@
 # SUNSHINE
 
-Sunshine is a weather application developed through out the following courses
-[Developing Android Apps](https://www.udacity.com/course/new-android-fundamentals--ud851)
+Sunshine is a weather application developed through out the following courses<br/>
+[Developing Android Apps](https://www.udacity.com/course/new-android-fundamentals--ud851)<br/>
 [Advanced Android App Development](https://www.udacity.com/course/new-android-fundamentals--ud851)
 
 # LICENSE
