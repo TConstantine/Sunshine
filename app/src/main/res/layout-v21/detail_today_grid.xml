@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v4.widget.Space
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/detailDateTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/detailDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toTopOf="@+id/detailHighTextView"
+        app:layout_constraintEnd_toEndOf="@+id/detail_icon"
+        app:layout_constraintStart_toEndOf="@+id/detail_icon"
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:layout_gravity="fill_horizontal"
+        tools:text="Today, April 03"/>
+
+    <ImageView
+        android:id="@+id/detail_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/weather_icon"
+        android:maxHeight="@dimen/today_icon"
+        android:maxWidth="@dimen/today_icon"
+        android:transitionName="@string/detail_icon_transition_name"
+        app:layout_constraintEnd_toStartOf="@+id/detailHighTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detailHighTextView"
+        app:layout_gravity="fill_horizontal"
+        tools:src="@drawable/art_clouds"/>
+
+    <TextView
+        android:id="@+id/detailHighTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:textColor="@color/primary_text"
+        android:textSize="72sp"
+        app:layout_constraintBottom_toTopOf="@+id/detailForecastTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/detail_icon"
+        app:layout_constraintTop_toBottomOf="@+id/detailDateTextView"
+        app:layout_gravity="fill_horizontal"
+        tools:text="19"/>
+
+    <TextView
+        android:id="@+id/detailForecastTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toTopOf="@+id/space2"
+        app:layout_constraintEnd_toStartOf="@+id/detailLowTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailHighTextView"
+        tools:text="Rainy"/>
+
+    <TextView
+        android:id="@+id/detailLowTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:textColor="@color/secondary_text"
+        android:textSize="36sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/detailForecastTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/detailForecastTextView"
+        tools:text="10"/>
+
+    <android.support.v4.widget.Space
+        android:id="@+id/space2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/detailForecastTextView"
+        app:layout_constraintStart_toEndOf="@+id/detailForecastTextView"
+        app:layout_constraintTop_toBottomOf="@+id/detailForecastTextView"/>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion buildVersions.targetSdk
+    defaultConfig {
+        applicationId "constantine.theodoridis.app.sunshine"
+        minSdkVersion buildVersions.minSdk
+        targetSdkVersion buildVersions.targetSdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', OpenWeatherMapApiKey
+    }
+}
+
+dependencies {
+    implementation deps.kotlin.core
+    implementation deps.support.appCompat
+    implementation deps.support.annotations
+    implementation deps.support.design
+    implementation deps.support.recyclerview
+    implementation deps.support.gridlayout
+    implementation deps.support.cardview
+    implementation deps.support.constraintLayout
+    implementation deps.muzei.core
+    implementation deps.glide.core
+    implementation deps.playServices.gcm
+    implementation deps.playServices.location
+    implementation deps.playServices.places
+    testImplementation deps.test.jUnit
+    testImplementation deps.test.mockito
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.runner
+    androidTestImplementation deps.espresso.rules
+    androidTestImplementation deps.espresso.contrib
+    androidTestImplementation deps.espresso.intents
+}
