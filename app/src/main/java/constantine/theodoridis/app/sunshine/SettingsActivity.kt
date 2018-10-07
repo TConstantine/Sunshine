@@ -26,7 +26,6 @@ import android.preference.ListPreference
 import android.preference.Preference
 import android.preference.PreferenceActivity
 import android.preference.PreferenceManager
-import android.support.design.widget.Snackbar
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -37,9 +36,10 @@ import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
 class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
 	companion object {
 		const val PLACE_PICKER_REQUEST = 9090
+		const val GOOGLE_ATTRIBUTION = "Google Attribution"
 	}
 
-	private var mAttribution: ImageView? = null
+	private lateinit var googleAttribution : ImageView
 
 	public override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -47,12 +47,13 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 		bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)))
 		bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)))
 		bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_art_pack_key)))
-		mAttribution = ImageView(this)
-		mAttribution!!.setImageResource(R.drawable.powered_by_google_light)
+		googleAttribution = ImageView(this)
+		googleAttribution.tag = GOOGLE_ATTRIBUTION
+		googleAttribution.setImageResource(R.drawable.powered_by_google_light)
 		if (!Utility.isLocationLatLonAvailable(this)) {
-			mAttribution!!.visibility = View.GONE
+			googleAttribution.visibility = View.GONE
 		}
-		setListFooter(mAttribution)
+		setListFooter(googleAttribution)
 	}
 
 	override fun onResume() {
@@ -107,9 +108,7 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 				editor.remove(getString(R.string.pref_location_latitude))
 				editor.remove(getString(R.string.pref_location_longitude))
 				editor.apply()
-				if (mAttribution != null) {
-					mAttribution!!.visibility = View.GONE
-				}
+				googleAttribution.visibility = View.GONE
 				Utility.resetLocationStatus(this)
 				SunshineSyncAdapter.syncImmediately(this)
 			}
@@ -127,34 +126,30 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 		return super.getParentActivityIntent()!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 	}
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		if (requestCode == PLACE_PICKER_REQUEST) {
 			if (resultCode == Activity.RESULT_OK) {
-				val place = PlacePicker.getPlace(data, this)
-				var address = place.address!!.toString()
-				val latLong = place.latLng
-				if (TextUtils.isEmpty(address)) {
-					address = String.format("(%.2f, %.2f)", latLong.latitude, latLong.longitude)
+				if (data != null) {
+					val place = PlacePicker.getPlace(data, this)
+					var address = place.address!!.toString()
+					val latLong = place.latLng
+					if (TextUtils.isEmpty(address)) {
+						address = String.format("(%.2f, %.2f)", latLong.latitude, latLong.longitude)
+					}
+					val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+					val editor = sharedPreferences.edit()
+					editor.putString(getString(R.string.pref_location_key), address)
+					editor.putFloat(getString(R.string.pref_location_latitude),
+									latLong.latitude.toFloat())
+					editor.putFloat(getString(R.string.pref_location_longitude),
+									latLong.longitude.toFloat())
+					editor.apply()
+					val locationPreference = findPreference(getString(R.string.pref_location_key))
+					setPreferenceSummary(locationPreference, address)
+					googleAttribution.visibility = View.VISIBLE
+					Utility.resetLocationStatus(this)
+					SunshineSyncAdapter.syncImmediately(this)
 				}
-				val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-				val editor = sharedPreferences.edit()
-				editor.putString(getString(R.string.pref_location_key), address)
-				editor.putFloat(getString(R.string.pref_location_latitude),
-								latLong.latitude.toFloat())
-				editor.putFloat(getString(R.string.pref_location_longitude),
-								latLong.longitude.toFloat())
-				editor.apply()
-				val locationPreference = findPreference(getString(R.string.pref_location_key))
-				setPreferenceSummary(locationPreference, address)
-				if (mAttribution != null) {
-					mAttribution!!.visibility = View.VISIBLE
-				} else {
-					val rootView = findViewById<View>(android.R.id.content)
-					Snackbar.make(rootView, getString(R.string.attribution_text),
-									Snackbar.LENGTH_LONG).show()
-				}
-				Utility.resetLocationStatus(this)
-				SunshineSyncAdapter.syncImmediately(this)
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data)
