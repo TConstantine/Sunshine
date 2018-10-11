@@ -175,17 +175,11 @@ class DetailFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 			mLowTempView!!.contentDescription = getString(R.string.a11y_low_temp, lowString)
 			val humidity = data.getFloat(COL_WEATHER_HUMIDITY)
 			mHumidityView!!.text = activity!!.getString(R.string.format_humidity, humidity)
-			mHumidityView!!.contentDescription = getString(R.string.a11y_humidity, mHumidityView!!.text)
-			mHumidityLabelView!!.contentDescription = mHumidityView!!.contentDescription
 			val windSpeedStr = data.getFloat(COL_WEATHER_WIND_SPEED)
 			val windDirStr = data.getFloat(COL_WEATHER_DEGREES)
 			mWindView!!.text = Utility.getFormattedWind(context!!, windSpeedStr, windDirStr)
-			mWindView!!.contentDescription = getString(R.string.a11y_wind, mWindView!!.text)
-			mWindLabelView!!.contentDescription = mWindView!!.contentDescription
 			val pressure = data.getFloat(COL_WEATHER_PRESSURE)
 			mPressureView!!.text = getString(R.string.format_pressure, pressure)
-			mPressureView!!.contentDescription = getString(R.string.a11y_pressure, mPressureView!!.text)
-			mPressureLabelView!!.contentDescription = mPressureView!!.contentDescription
 			mForecast = String.format("%s - %s - %s/%s", dateText, description, high, low)
 
 		}
