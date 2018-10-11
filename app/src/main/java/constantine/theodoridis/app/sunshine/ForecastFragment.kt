@@ -43,6 +43,7 @@ import constantine.theodoridis.app.sunshine.data.WeatherContract
 import constantine.theodoridis.app.sunshine.di.AndroidInjection
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
 import constantine.theodoridis.app.sunshine.ui.forecasts.ForecastsContract
+import javax.inject.Inject
 
 class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>,
 				SharedPreferences.OnSharedPreferenceChangeListener, ForecastsContract.View {

@@ -18,6 +18,9 @@ package constantine.theodoridis.app.sunshine.ui.forecasts
 
 import constantine.theodoridis.app.sunshine.MockitoTest
 import constantine.theodoridis.app.sunshine.domain.usecases.GetGeoLocationUseCase
+import io.reactivex.plugins.RxJavaPlugins.reset
+import io.reactivex.plugins.RxJavaPlugins.setIoSchedulerHandler
+import io.reactivex.schedulers.Schedulers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

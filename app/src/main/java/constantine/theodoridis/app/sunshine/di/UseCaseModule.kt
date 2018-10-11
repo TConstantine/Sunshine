@@ -21,6 +21,8 @@ import constantine.theodoridis.app.sunshine.domain.helpers.SharedPreferencesHelp
 import constantine.theodoridis.app.sunshine.domain.repositories.LocationRepository
 import constantine.theodoridis.app.sunshine.domain.usecases.GetGeoLocation
 import constantine.theodoridis.app.sunshine.domain.usecases.GetGeoLocationUseCase
+import dagger.Module
+import dagger.Provides
 
 @Module
 class UseCaseModule {

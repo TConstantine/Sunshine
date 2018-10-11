@@ -19,6 +19,9 @@ package constantine.theodoridis.app.sunshine.di
 import constantine.theodoridis.app.sunshine.domain.usecases.GetGeoLocationUseCase
 import constantine.theodoridis.app.sunshine.ui.forecasts.ForecastsContract
 import constantine.theodoridis.app.sunshine.ui.forecasts.ForecastsPresenter
+import dagger.Module
+import dagger.Provides
+import io.reactivex.Scheduler
 
 @Module
 class ForecastsModule(private val view: ForecastsContract.View) {

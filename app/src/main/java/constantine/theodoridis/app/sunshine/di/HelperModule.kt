@@ -22,6 +22,8 @@ import constantine.theodoridis.app.sunshine.data.helpers.AndroidResources
 import constantine.theodoridis.app.sunshine.data.helpers.AndroidSharedPreferences
 import constantine.theodoridis.app.sunshine.domain.helpers.ResourcesHelper
 import constantine.theodoridis.app.sunshine.domain.helpers.SharedPreferencesHelper
+import dagger.Module
+import dagger.Provides
 
 @Module
 class HelperModule {

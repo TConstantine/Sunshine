@@ -17,6 +17,11 @@
 package constantine.theodoridis.app.sunshine.ui.forecasts
 
 import constantine.theodoridis.app.sunshine.domain.usecases.GetGeoLocationUseCase
+import io.reactivex.Scheduler
+import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 class ForecastsPresenter(private val view: ForecastsContract.View,
 												 private val getGeoLocationUseCase: GetGeoLocationUseCase,

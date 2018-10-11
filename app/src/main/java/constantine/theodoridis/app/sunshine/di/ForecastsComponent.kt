@@ -17,6 +17,7 @@
 package constantine.theodoridis.app.sunshine.di
 
 import constantine.theodoridis.app.sunshine.ForecastFragment
+import dagger.Component
 
 @Component(modules = [
 	ActivityModule::class,
