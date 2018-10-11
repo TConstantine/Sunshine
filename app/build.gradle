@@ -26,6 +26,20 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', OpenWeatherMapApiKey
     }
+    flavorDimensions "mock"
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+            dimension "mock"
+        }
+        production {
+        }
+    }
+    android.variantFilter { variant ->
+        if(variant.buildType.name == 'release' && variant.getFlavors().get(0).name == 'mock') {
+            variant.setIgnore(true)
+        }
+    }
 }
 
 dependencies {
@@ -37,6 +51,10 @@ dependencies {
     implementation deps.support.gridlayout
     implementation deps.support.cardview
     implementation deps.support.constraintLayout
+    implementation deps.rx.java
+    implementation deps.rx.android
+    implementation deps.dagger.core
+    kapt deps.dagger.compiler
     implementation deps.muzei.core
     implementation deps.glide.core
     implementation deps.playServices.gcm

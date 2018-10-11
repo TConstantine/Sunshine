@@ -121,4 +121,5 @@
     <string name="gcm_weather_alert">Heads up: %1$s in %2$s!</string>
     <string name="gcm_defaultSenderId" translatable="false"></string>
     <string name="weather_icon">Weather Icon</string>
+    <string name="invalid_location_message">Invalid Location</string>
 </resources>

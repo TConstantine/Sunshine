@@ -19,6 +19,7 @@ package constantine.theodoridis.app.sunshine
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_VIEW
 import android.content.SharedPreferences
 import android.database.Cursor
 import android.net.Uri
@@ -37,10 +38,14 @@ import android.util.AttributeSet
 import android.view.*
 import android.widget.AbsListView
 import android.widget.TextView
+import android.widget.Toast
 import constantine.theodoridis.app.sunshine.data.WeatherContract
+import constantine.theodoridis.app.sunshine.di.AndroidInjection
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
+import constantine.theodoridis.app.sunshine.ui.forecasts.ForecastsContract
 
-class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
+class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>,
+				SharedPreferences.OnSharedPreferenceChangeListener, ForecastsContract.View {
 	companion object {
 		private const val FORECAST_LOADER = 0
 		private val FORECAST_COLUMNS = arrayOf(WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry.ID, WeatherContract.WeatherEntry.COLUMN_DATE, WeatherContract.WeatherEntry.COLUMN_SHORT_DESC, WeatherContract.WeatherEntry.COLUMN_MAX_TEMP, WeatherContract.WeatherEntry.COLUMN_MIN_TEMP, WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, WeatherContract.WeatherEntry.COLUMN_WEATHER_ID, WeatherContract.LocationEntry.COLUMN_COORDINATE_LATITUDE, WeatherContract.LocationEntry.COLUMN_COORDINATE_LONGITUDE)
@@ -48,8 +53,6 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 		internal const val COL_WEATHER_MAX_TEMP = 3
 		internal const val COL_WEATHER_MIN_TEMP = 4
 		internal const val COL_WEATHER_CONDITION_ID = 6
-		internal const val COL_COORDINATE_LATITUDE = 7
-		internal const val COL_COORDINATE_LONGITUDE = 8
 	}
 
 	private var mForecastAdapter: ForecastAdapter? = null
@@ -59,6 +62,9 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 	private var mChoiceMode: Int = 0
 	private var mHoldForTransition: Boolean = false
 	private var mInitialSelectedDate: Long = -1
+
+	@Inject
+	lateinit var presenter: ForecastsContract.Presenter
 
 	interface Callback {
 		fun onItemSelected(dateUri: Uri, vh: ForecastAdapter.ForecastAdapterViewHolder)
@@ -88,7 +94,7 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		val id = item!!.itemId
 		if (id == R.id.action_map) {
-			openPreferredLocationInMap()
+			presenter.onDisplayMapLocation()
 			return true
 		}
 		return super.onOptionsItemSelected(item)
@@ -161,6 +167,7 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 	}
 
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
+		AndroidInjection.inject(this, this)
 		if (mHoldForTransition) {
 			activity!!.supportPostponeEnterTransition()
 		}
@@ -168,24 +175,19 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 		super.onActivityCreated(savedInstanceState)
 	}
 
+	override fun onStop() {
+		super.onStop()
+		presenter.unSubscribe()
+	}
+
 	internal fun onLocationChanged() {
 		loaderManager.restartLoader(FORECAST_LOADER, null, this)
 	}
 
-	private fun openPreferredLocationInMap() {
-		if (null != mForecastAdapter) {
-			val c = mForecastAdapter!!.cursor
-			if (null != c) {
-				c.moveToPosition(0)
-				val posLat = c.getString(COL_COORDINATE_LATITUDE)
-				val posLong = c.getString(COL_COORDINATE_LONGITUDE)
-				val geoLocation = Uri.parse("geo:$posLat,$posLong")
-				val intent = Intent(Intent.ACTION_VIEW)
-				intent.data = geoLocation
-				if (intent.resolveActivity(activity!!.packageManager) != null) {
-					startActivity(intent)
-				}
-			}
+	override fun onDestroy() {
+		super.onDestroy()
+		if (null != mRecyclerView) {
+			mRecyclerView!!.clearOnScrollListeners()
 		}
 	}
 
@@ -217,12 +219,12 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 						mRecyclerView!!.viewTreeObserver.removeOnPreDrawListener(this)
 						var position = mForecastAdapter!!.selectedItemPosition
 						if (position == RecyclerView.NO_POSITION && -1L != mInitialSelectedDate) {
-							val data = mForecastAdapter!!.cursor
-							val count = data!!.count
-							val dateColumn = data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATE)
+							val newData = mForecastAdapter!!.cursor
+							val count = newData!!.count
+							val dateColumn = newData.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATE)
 							for (i in 0 until count) {
-								data.moveToPosition(i)
-								if (data.getLong(dateColumn) == mInitialSelectedDate) {
+								newData.moveToPosition(i)
+								if (newData.getLong(dateColumn) == mInitialSelectedDate) {
 									position = i
 									break
 								}
@@ -245,15 +247,25 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 		}
 	}
 
-	override fun onDestroy() {
-		super.onDestroy()
-		if (null != mRecyclerView) {
-			mRecyclerView!!.clearOnScrollListeners()
+	override fun onLoaderReset(loader: Loader<Cursor>) {
+		mForecastAdapter!!.swapCursor(null!!)
+	}
+
+	override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+		if (key == getString(R.string.pref_location_status_key)) {
+			updateEmptyView()
 		}
 	}
 
-	override fun onLoaderReset(loader: Loader<Cursor>) {
-		mForecastAdapter!!.swapCursor(null!!)
+	override fun displayMapLocation(geoLocation: String) {
+		val intent = Intent(ACTION_VIEW, Uri.parse(geoLocation))
+		if (intent.resolveActivity(activity!!.packageManager) != null) {
+			startActivity(intent)
+		}
+	}
+
+	override fun displayInvalidLocationError() {
+		Toast.makeText(context, R.string.invalid_location_message, Toast.LENGTH_SHORT).show()
 	}
 
 	fun setUseTodayLayout(useTodayLayout: Boolean) {
@@ -281,12 +293,6 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>, Shar
 				}
 			}
 			tv.setText(message)
-		}
-	}
-
-	override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-		if (key == getString(R.string.pref_location_status_key)) {
-			updateEmptyView()
 		}
 	}
 }
