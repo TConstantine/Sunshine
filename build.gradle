@@ -6,6 +6,9 @@ buildscript {
         classpath deps.kotlin.gradle
         classpath deps.googleServices
     }
+    repositories {
+        google()
+    }
 }
 
 allprojects {
