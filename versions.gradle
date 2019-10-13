@@ -78,7 +78,7 @@ ext.deps = deps
 
 def buildVersions = [:]
 buildVersions.minSdk = 16
-buildVersions.targetSdk = 27
+buildVersions.targetSdk = 28
 ext.buildVersions = buildVersions
 
 static def addRepos(RepositoryHandler handler) {
