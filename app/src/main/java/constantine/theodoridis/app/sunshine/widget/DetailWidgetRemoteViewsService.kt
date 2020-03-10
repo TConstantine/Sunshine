@@ -91,10 +91,10 @@ class DetailWidgetRemoteViewsService : RemoteViewsService() {
 									this@DetailWidgetRemoteViewsService, weatherId)
 					try {
 						weatherArtImage = Glide.with(this@DetailWidgetRemoteViewsService)
-										.load(weatherArtResourceUrl)
-										.asBitmap()
-										.error(weatherArtResourceId)
-										.into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
+							.asBitmap()
+							.load(weatherArtResourceUrl)
+							.error(weatherArtResourceId)
+							.into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
 					} catch (e: InterruptedException) {
 					} catch (e: ExecutionException) {
 					}

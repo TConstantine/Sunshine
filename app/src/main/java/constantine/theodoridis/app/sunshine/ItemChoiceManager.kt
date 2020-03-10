@@ -18,12 +18,12 @@ package constantine.theodoridis.app.sunshine
 
 import android.os.Bundle
 import android.os.Parcel
-import android.support.v4.util.LongSparseArray
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.RecyclerView
 import android.util.SparseBooleanArray
 import android.widget.AbsListView
 import android.widget.Checkable
+import androidx.collection.LongSparseArray
+import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.RecyclerView
 
 class ItemChoiceManager(private val mAdapter: RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder>) {
 	companion object {

@@ -26,19 +26,19 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.design.widget.AppBarLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.CursorLoader
-import android.support.v4.content.Loader
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.*
 import android.widget.AbsListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.CursorLoader
+import androidx.loader.content.Loader
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
 import constantine.theodoridis.app.sunshine.data.WeatherContract
 import constantine.theodoridis.app.sunshine.di.AndroidInjection
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
@@ -133,7 +133,7 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>,
 		if (null != parallaxView) {
 			mRecyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 				@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-				override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+				override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 					super.onScrolled(recyclerView, dx, dy)
 					val max = parallaxView.height
 					if (dy > 0) {
@@ -151,7 +151,7 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>,
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			mRecyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 				@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-				override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+				override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 					if (0 == mRecyclerView!!.computeVerticalScrollOffset()) {
 						appbarView?.elevation = 0f
 					} else {
@@ -208,8 +208,8 @@ class ForecastFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>,
 						sortOrder)
 	}
 
-	override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
-		mForecastAdapter!!.swapCursor(data)
+	override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
+		mForecastAdapter!!.swapCursor(data!!)
 		updateEmptyView()
 		if (data.count == 0) {
 			activity!!.supportStartPostponedEnterTransition()
