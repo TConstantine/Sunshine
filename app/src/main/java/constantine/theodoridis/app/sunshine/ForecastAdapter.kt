@@ -19,15 +19,15 @@ package constantine.theodoridis.app.sunshine
 import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
+import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import constantine.theodoridis.app.sunshine.data.WeatherContract
 
 class ForecastAdapter(private val mContext: Context, private val mClickHandler: ForecastAdapterOnClickHandler, private val mEmptyView: View, choiceMode: Int) : RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder>() {
@@ -109,10 +109,10 @@ class ForecastAdapter(private val mContext: Context, private val mClickHandler: 
 			forecastAdapterViewHolder.mIconView.setImageResource(defaultImage)
 		} else {
 			Glide.with(mContext)
-							.load(Utility.getArtUrlForWeatherCondition(mContext, weatherId))
-							.error(defaultImage)
-							.crossFade()
-							.into(forecastAdapterViewHolder.mIconView)
+				.load(Utility.getArtUrlForWeatherCondition(mContext, weatherId))
+				.error(defaultImage)
+				.transition(withCrossFade())
+				.into(forecastAdapterViewHolder.mIconView)
 		}
 		ViewCompat.setTransitionName(forecastAdapterViewHolder.mIconView, "iconView$position")
 		val dateInMillis = cursor!!.getLong(ForecastFragment.COL_WEATHER_DATE)

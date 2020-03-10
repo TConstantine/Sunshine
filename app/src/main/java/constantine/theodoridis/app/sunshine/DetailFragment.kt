@@ -20,17 +20,18 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.CursorLoader
-import android.support.v4.content.Loader
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.CardView
-import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.CursorLoader
+import androidx.loader.content.Loader
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import constantine.theodoridis.app.sunshine.data.WeatherContract
 
 class DetailFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
@@ -152,10 +153,10 @@ class DetailFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 				mIconView!!.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId))
 			} else {
 				Glide.with(this)
-								.load(Utility.getArtUrlForWeatherCondition(context!!, weatherId))
-								.error(Utility.getArtResourceForWeatherCondition(weatherId))
-								.crossFade()
-								.into(mIconView!!)
+					.load(Utility.getArtUrlForWeatherCondition(context!!, weatherId))
+					.error(Utility.getArtResourceForWeatherCondition(weatherId))
+					.transition(withCrossFade())
+					.into(mIconView!!)
 			}
 			val date = data.getLong(COL_WEATHER_DATE)
 			val dateText = Utility.getFullFriendlyDayString(context!!, date)

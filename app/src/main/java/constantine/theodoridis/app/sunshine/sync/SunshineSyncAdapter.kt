@@ -27,10 +27,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.annotation.IntDef
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.TaskStackBuilder
 import android.text.format.Time
+import androidx.annotation.IntDef
+import androidx.core.app.NotificationCompat
+import androidx.core.app.TaskStackBuilder
 import com.bumptech.glide.Glide
 import constantine.theodoridis.app.sunshine.BuildConfig
 import constantine.theodoridis.app.sunshine.MainActivity
@@ -331,11 +331,11 @@ class SunshineSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractT
 					val largeIcon: Bitmap
 					largeIcon = try {
 						Glide.with(context)
-										.load(artUrl)
-										.asBitmap()
-										.error(artResourceId)
-										.fitCenter()
-										.into(largeIconWidth, largeIconHeight).get()
+							.asBitmap()
+							.load(artUrl)
+							.error(artResourceId)
+							.fitCenter()
+							.into(largeIconWidth, largeIconHeight).get()
 					} catch (e: InterruptedException) {
 						BitmapFactory.decodeResource(resources, artResourceId)
 					} catch (e: ExecutionException) {
