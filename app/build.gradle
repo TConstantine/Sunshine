@@ -55,17 +55,22 @@ dependencies {
     implementation deps.rx.java
     implementation deps.rx.android
     implementation deps.dagger.core
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     kapt deps.dagger.compiler
     implementation deps.muzei.core
     implementation deps.glide.core
     implementation deps.playServices.gcm
     implementation deps.playServices.location
     implementation deps.playServices.places
+    testImplementation deps.test.architectureComponents
     testImplementation deps.test.jUnit
+    testImplementation deps.test.jUnitParams
     testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.espresso.runner
     androidTestImplementation deps.espresso.rules
     androidTestImplementation deps.espresso.contrib
     androidTestImplementation deps.espresso.intents
+    androidTestImplementation deps.test.jUnitParams
 }

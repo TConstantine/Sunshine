@@ -21,31 +21,31 @@
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
+          android:name=".presentation.forecasts.ForecastsActivity"
+          android:label="@string/app_name"
             android:theme="@style/AppTheme.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.Details">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="constantine.theodoridis.app.sunshine.MainActivity"/>
-        </activity>
+      <activity
+        android:name=".ui.weatherforecastdetails.WeatherForecastDetailsActivity"
+        android:label="@string/title_activity_detail"
+        android:parentActivityName=".presentation.forecasts.ForecastsActivity"
+        android:theme="@style/AppTheme.Details">
+        <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity" />
+      </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/SettingsTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="constantine.theodoridis.app.sunshine.MainActivity"/>
+          android:label="@string/title_activity_settings"
+          android:parentActivityName=".presentation.forecasts.ForecastsActivity"
+          android:theme="@style/SettingsTheme">
+          <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity" />
         </activity>
         <provider
             android:authorities="@string/content_authority"

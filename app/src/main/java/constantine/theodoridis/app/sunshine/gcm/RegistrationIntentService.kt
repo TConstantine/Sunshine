@@ -19,7 +19,7 @@ package constantine.theodoridis.app.sunshine.gcm
 import android.app.IntentService
 import android.content.Intent
 import android.preference.PreferenceManager
-import constantine.theodoridis.app.sunshine.MainActivity
+import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
 
 class RegistrationIntentService : IntentService(TAG) {
 	companion object {
@@ -30,10 +30,10 @@ class RegistrationIntentService : IntentService(TAG) {
 		val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 		try {
 			synchronized(TAG) {
-				sharedPreferences.edit().putBoolean(MainActivity.SENT_TOKEN_TO_SERVER, true).apply()
+				sharedPreferences.edit().putBoolean(ForecastsActivity.SENT_TOKEN_TO_SERVER, true).apply()
 			}
 		} catch (e: Exception) {
-			sharedPreferences.edit().putBoolean(MainActivity.SENT_TOKEN_TO_SERVER, false).apply()
+			sharedPreferences.edit().putBoolean(ForecastsActivity.SENT_TOKEN_TO_SERVER, false).apply()
 		}
 	}
 }

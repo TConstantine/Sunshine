@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="constantine.theodoridis.app.sunshine.ForecastFragment">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        style="@style/ForecastListStyle"
-        android:id="@+id/recyclerViewForecast"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <TextView
-        android:id="@+id/recyclerViewForecastEmpty"
-        android:text="@string/empty_forecast_list"
-        android:layout_width="match_parent"
+  <androidx.recyclerview.widget.RecyclerView
+    style="@style/ForecastListStyle"
+    android:id="@+id/recyclerViewForecast"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+  <TextView
+    android:id="@+id/recyclerViewForecastEmpty"
+    android:text="@string/empty_forecast_list"
+    android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:paddingRight="@dimen/activity_horizontal_margin"

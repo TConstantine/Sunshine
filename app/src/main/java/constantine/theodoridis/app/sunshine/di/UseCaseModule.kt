@@ -16,21 +16,38 @@
 
 package constantine.theodoridis.app.sunshine.di
 
-import constantine.theodoridis.app.sunshine.domain.helpers.ResourcesHelper
-import constantine.theodoridis.app.sunshine.domain.helpers.SharedPreferencesHelper
-import constantine.theodoridis.app.sunshine.domain.repositories.LocationRepository
-import constantine.theodoridis.app.sunshine.domain.usecases.GetGeoLocation
-import constantine.theodoridis.app.sunshine.domain.usecases.GetGeoLocationUseCase
+import constantine.theodoridis.app.sunshine.data.datasource.PreferenceDataSource
+import constantine.theodoridis.app.sunshine.data.datasource.ResourceDataSource
+import constantine.theodoridis.app.sunshine.domain.repository.LocationRepository
+import constantine.theodoridis.app.sunshine.domain.repository.WeatherForecastRepository
+import constantine.theodoridis.app.sunshine.domain.usecase.GetGeoLocation
+import constantine.theodoridis.app.sunshine.domain.usecase.GetGeoLocationUseCase
+import constantine.theodoridis.app.sunshine.domain.usecase.UseCase
+import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.loadweatherforecastdetails.LoadWeatherForecastDetailsRequest
+import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.loadweatherforecastdetails.LoadWeatherForecastDetailsResponse
+import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.loadweatherforecastdetails.LoadWeatherForecastDetailsUseCase
+import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.repository.StringRepository
+import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.repository.TemperatureUnitRepository
 import dagger.Module
 import dagger.Provides
 
 @Module
 class UseCaseModule {
 	@Provides
-	fun provideGetGeoLocationUseCase(resourcesHelper: ResourcesHelper,
-																	 sharedPreferencesHelper: SharedPreferencesHelper,
-																	 locationRepository: LocationRepository):
-					GetGeoLocationUseCase {
-		return GetGeoLocation(resourcesHelper, sharedPreferencesHelper, locationRepository)
+	fun provideGetGeoLocationUseCase(
+			resourceDataSource: ResourceDataSource,
+			preferenceDataSource: PreferenceDataSource,
+			locationRepository: LocationRepository
+	): GetGeoLocationUseCase {
+		return GetGeoLocation(resourceDataSource, preferenceDataSource, locationRepository)
+	}
+
+	@Provides
+	fun provideLoadWeatherForecastUseCase(
+			weatherForecastRepository: WeatherForecastRepository,
+			temperatureUnitRepository: TemperatureUnitRepository,
+			stringRepository: StringRepository
+	): UseCase<LoadWeatherForecastDetailsRequest, LoadWeatherForecastDetailsResponse> {
+		return LoadWeatherForecastDetailsUseCase(weatherForecastRepository, temperatureUnitRepository, stringRepository)
 	}
 }

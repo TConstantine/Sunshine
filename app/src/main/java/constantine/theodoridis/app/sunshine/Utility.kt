@@ -41,19 +41,19 @@ object Utility {
 	fun getLocationLongitude(context: Context): Float {
 		val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 		return prefs.getFloat(context.getString(R.string.pref_location_longitude),
-						DEFAULT_LAT_LONG)
+				DEFAULT_LAT_LONG)
 	}
 
 	fun getPreferredLocation(context: Context): String {
 		val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-		return prefs.getString(context.getString(R.string.pref_location_key),
-						context.getString(R.string.pref_location_default))
+		return prefs.getString(context.getString(R.string.preference_location_key),
+				context.getString(R.string.preference_location_key_default))
 	}
 
-	fun isMetric(context: Context): Boolean {
+	private fun isMetric(context: Context): Boolean {
 		val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-		return prefs.getString(context.getString(R.string.pref_units_key),
-						context.getString(R.string.pref_units_metric)) == context.getString(R.string.pref_units_metric)
+		return prefs.getString(context.getString(R.string.preference_temperature_unit_key),
+				context.getString(R.string.pref_units_metric)) == context.getString(R.string.pref_units_metric)
 	}
 
 	fun formatTemperature(context: Context, temperature: Double): String {
@@ -85,16 +85,6 @@ object Utility {
 		}
 	}
 
-	fun getFullFriendlyDayString(context: Context, dateInMillis: Long): String {
-		val day = getDayName(context, dateInMillis)
-		val formatId = R.string.format_full_friendly_date
-		return String.format(context.getString(
-						formatId,
-						day,
-						getFormattedMonthDay(dateInMillis)))
-	}
-
-
 	private fun getDayName(context: Context, dateInMillis: Long): String {
 		val t = Time()
 		t.setToNow()
@@ -118,37 +108,6 @@ object Utility {
 		val monthDayFormat = SimpleDateFormat("MMMM dd", Locale.getDefault())
 		return monthDayFormat.format(dateInMillis)
 	}
-
-	fun getFormattedWind(context: Context, windSpeed: Float, degrees: Float): String {
-		var newWindSpeed = windSpeed
-		val windFormat: Int
-		if (isMetric(context)) {
-			windFormat = R.string.format_wind_kmh
-		} else {
-			windFormat = R.string.format_wind_mph
-			newWindSpeed *= .621371192237334f
-		}
-		var direction = "Unknown"
-		if (degrees >= 337.5 || degrees < 22.5) {
-			direction = "N"
-		} else if (degrees >= 22.5 && degrees < 67.5) {
-			direction = "NE"
-		} else if (degrees >= 67.5 && degrees < 112.5) {
-			direction = "E"
-		} else if (degrees >= 112.5 && degrees < 157.5) {
-			direction = "SE"
-		} else if (degrees >= 157.5 && degrees < 202.5) {
-			direction = "S"
-		} else if (degrees >= 202.5 && degrees < 247.5) {
-			direction = "SW"
-		} else if (degrees >= 247.5 && degrees < 292.5) {
-			direction = "W"
-		} else if (degrees >= 292.5 && degrees < 337.5) {
-			direction = "NW"
-		}
-		return String.format(context.getString(windFormat), newWindSpeed, direction)
-	}
-
 
 	fun getIconResourceForWeatherCondition(weatherId: Int): Int {
 		if (weatherId in 200..232) {
@@ -180,14 +139,14 @@ object Utility {
 	fun usingLocalGraphics(context: Context): Boolean {
 		val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 		val sunshineArtPack = context.getString(R.string.pref_art_pack_sunshine)
-		return prefs.getString(context.getString(R.string.pref_art_pack_key),
-						sunshineArtPack) == sunshineArtPack
+		return prefs.getString(context.getString(R.string.preference_icon_pack_key),
+				sunshineArtPack) == sunshineArtPack
 	}
 
 	fun getArtUrlForWeatherCondition(context: Context, weatherId: Int): String? {
 		val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-		val formatArtUrl = prefs.getString(context.getString(R.string.pref_art_pack_key),
-						context.getString(R.string.pref_art_pack_sunshine))
+		val formatArtUrl = prefs.getString(context.getString(R.string.preference_icon_pack_key),
+				context.getString(R.string.pref_art_pack_sunshine))
 		if (weatherId in 200..232) {
 			return String.format(Locale.US, formatArtUrl!!, "storm")
 		} else if (weatherId in 300..321) {

@@ -71,6 +71,7 @@ class LocationEditTextPreference(context: Context, attrs: AttributeSet) : EditTe
 	override fun showDialog(state: Bundle?) {
 		super.showDialog(state)
 		val et = editText
+		et.hint = context.resources.getString(R.string.location_edit_text_hint)
 		et.addTextChangedListener(object : TextWatcher {
 			override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 			}

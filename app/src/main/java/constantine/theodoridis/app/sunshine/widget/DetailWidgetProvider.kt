@@ -26,27 +26,27 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.TaskStackBuilder
-import constantine.theodoridis.app.sunshine.DetailActivity
-import constantine.theodoridis.app.sunshine.MainActivity
 import constantine.theodoridis.app.sunshine.R
+import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
+import constantine.theodoridis.app.sunshine.ui.weatherforecastdetails.WeatherForecastDetailsActivity
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 class DetailWidgetProvider : AppWidgetProvider() {
 	override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
 		for (appWidgetId in appWidgetIds) {
 			val views = RemoteViews(context.packageName, R.layout.widget_detail)
-			val intent = Intent(context, MainActivity::class.java)
+			val intent = Intent(context, ForecastsActivity::class.java)
 			val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
 			views.setOnClickPendingIntent(R.id.widget, pendingIntent)
 			setRemoteAdapter(context, views)
 			val useDetailActivity = context.resources.getBoolean(R.bool.use_detail_activity)
 			val clickIntentTemplate = if (useDetailActivity)
-				Intent(context, DetailActivity::class.java)
+				Intent(context, WeatherForecastDetailsActivity::class.java)
 			else
-				Intent(context, MainActivity::class.java)
+				Intent(context, ForecastsActivity::class.java)
 			val clickPendingIntentTemplate = TaskStackBuilder.create(context)
-							.addNextIntentWithParentStack(clickIntentTemplate)
+					.addNextIntentWithParentStack(clickIntentTemplate)
 							.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 			views.setPendingIntentTemplate(R.id.widget_list, clickPendingIntentTemplate)
 			views.setEmptyView(R.id.widget_list, R.id.widget_empty)

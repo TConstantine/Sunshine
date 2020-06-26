@@ -24,11 +24,10 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
-
-import constantine.theodoridis.app.sunshine.MainActivity
 import constantine.theodoridis.app.sunshine.R
 import constantine.theodoridis.app.sunshine.Utility
 import constantine.theodoridis.app.sunshine.data.WeatherContract
+import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
 
 class TodayWidgetIntentService : IntentService("TodayWidgetIntentService") {
 	companion object {
@@ -76,7 +75,7 @@ class TodayWidgetIntentService : IntentService("TodayWidgetIntentService") {
 			views.setTextViewText(R.id.widget_description, description)
 			views.setTextViewText(R.id.widget_high_temperature, formattedMaxTemperature)
 			views.setTextViewText(R.id.widget_low_temperature, formattedMinTemperature)
-			val launchIntent = Intent(this, MainActivity::class.java)
+			val launchIntent = Intent(this, ForecastsActivity::class.java)
 			val pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0)
 			views.setOnClickPendingIntent(R.id.widget, pendingIntent)
 			appWidgetManager.updateAppWidget(appWidgetId, views)

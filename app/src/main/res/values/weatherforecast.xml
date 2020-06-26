@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="icon_description_label">Weather forecast icon:</string>
+  <string name="forecast_description_label">Weather forecast:</string>
+  <string name="max_temperature_description_label">High:</string>
+  <string name="min_temperature_description_label">Low:</string>
+  <string name="pressure_unit" translatable="false">hPa</string>
+  <string name="wind_speed_unit_metric">km/h</string>
+  <string name="wind_speed_unit_imperial">mph</string>
+</resources>

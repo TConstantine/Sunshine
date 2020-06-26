@@ -33,11 +33,11 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
 import com.bumptech.glide.Glide
 import constantine.theodoridis.app.sunshine.BuildConfig
-import constantine.theodoridis.app.sunshine.MainActivity
 import constantine.theodoridis.app.sunshine.R
 import constantine.theodoridis.app.sunshine.Utility
 import constantine.theodoridis.app.sunshine.data.WeatherContract
 import constantine.theodoridis.app.sunshine.muzei.WeatherMuzeiSource
+import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -343,21 +343,21 @@ class SunshineSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractT
 					}
 					val title = context.getString(R.string.app_name)
 					val contentText = String.format(context.getString(R.string.format_notification),
-									desc,
-									Utility.formatTemperature(context, high),
-									Utility.formatTemperature(context, low))
+							desc,
+							Utility.formatTemperature(context, high),
+							Utility.formatTemperature(context, low))
 					val mBuilder = NotificationCompat.Builder(getContext())
-									.setColor(resources.getColor(R.color.primary_light))
-									.setSmallIcon(iconId)
-									.setLargeIcon(largeIcon)
-									.setContentTitle(title)
-									.setContentText(contentText)
-					val resultIntent = Intent(context, MainActivity::class.java)
+							.setColor(resources.getColor(R.color.primary_light))
+							.setSmallIcon(iconId)
+							.setLargeIcon(largeIcon)
+							.setContentTitle(title)
+							.setContentText(contentText)
+					val resultIntent = Intent(context, ForecastsActivity::class.java)
 					val stackBuilder = TaskStackBuilder.create(context)
 					stackBuilder.addNextIntent(resultIntent)
 					val resultPendingIntent = stackBuilder.getPendingIntent(
-									0,
-									PendingIntent.FLAG_UPDATE_CURRENT
+							0,
+							PendingIntent.FLAG_UPDATE_CURRENT
 					)
 					mBuilder.setContentIntent(resultPendingIntent)
 					val mNotificationManager = getContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

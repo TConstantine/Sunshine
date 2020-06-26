@@ -39,8 +39,8 @@
         app:cardPreventCornerOverlap="false"/>
     <fragment
         android:id="@+id/fragment_forecast"
-        android:name="constantine.theodoridis.app.sunshine.ForecastFragment"
-        android:layout_height="match_parent"
+      android:name="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsFragment"
+      android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_below="@id/weather_detail_container"
         tools:layout="@android:layout/list_content"

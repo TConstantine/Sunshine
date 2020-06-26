@@ -44,9 +44,9 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 	public override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		addPreferencesFromResource(R.xml.pref_general)
-		bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)))
-		bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)))
-		bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_art_pack_key)))
+		bindPreferenceSummaryToValue(findPreference(getString(R.string.preference_location_key)))
+		bindPreferenceSummaryToValue(findPreference(getString(R.string.preference_temperature_unit_key)))
+		bindPreferenceSummaryToValue(findPreference(getString(R.string.preference_icon_pack_key)))
 		googleAttribution = ImageView(this)
 		googleAttribution.tag = GOOGLE_ATTRIBUTION
 		googleAttribution.setImageResource(R.drawable.powered_by_google_light)
@@ -83,7 +83,7 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 			if (prefIndex >= 0) {
 				preference.setSummary(preference.entries[prefIndex])
 			}
-		} else if (key == getString(R.string.pref_location_key)) {
+		} else if (key == getString(R.string.preference_location_key)) {
 			@SunshineSyncAdapter.LocationStatus val status = Utility.getLocationStatus(this)
 			when (status) {
 				SunshineSyncAdapter.LOCATION_STATUS_OK -> preference.summary = stringValue
@@ -103,7 +103,7 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 
 	override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
 		when (key) {
-			getString(R.string.pref_location_key) -> {
+			getString(R.string.preference_location_key) -> {
 				val editor = sharedPreferences.edit()
 				editor.remove(getString(R.string.pref_location_latitude))
 				editor.remove(getString(R.string.pref_location_longitude))
@@ -112,12 +112,12 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 				Utility.resetLocationStatus(this)
 				SunshineSyncAdapter.syncImmediately(this)
 			}
-			getString(R.string.pref_units_key) -> contentResolver.notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null)
+			getString(R.string.preference_temperature_unit_key) -> contentResolver.notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null)
 			getString(R.string.pref_location_status_key) -> {
-				val locationPreference = findPreference(getString(R.string.pref_location_key))
+				val locationPreference = findPreference(getString(R.string.preference_location_key))
 				bindPreferenceSummaryToValue(locationPreference)
 			}
-			getString(R.string.pref_art_pack_key) -> contentResolver.notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null)
+			getString(R.string.preference_icon_pack_key) -> contentResolver.notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null)
 		}
 	}
 
@@ -138,13 +138,13 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 					}
 					val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 					val editor = sharedPreferences.edit()
-					editor.putString(getString(R.string.pref_location_key), address)
+					editor.putString(getString(R.string.preference_location_key), address)
 					editor.putFloat(getString(R.string.pref_location_latitude),
-									latLong.latitude.toFloat())
+							latLong.latitude.toFloat())
 					editor.putFloat(getString(R.string.pref_location_longitude),
-									latLong.longitude.toFloat())
+							latLong.longitude.toFloat())
 					editor.apply()
-					val locationPreference = findPreference(getString(R.string.pref_location_key))
+					val locationPreference = findPreference(getString(R.string.preference_location_key))
 					setPreferenceSummary(locationPreference, address)
 					googleAttribution.visibility = View.VISIBLE
 					Utility.resetLocationStatus(this)

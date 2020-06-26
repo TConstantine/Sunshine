@@ -20,9 +20,9 @@ import android.content.Intent
 import android.net.Uri
 import com.google.android.apps.muzei.api.Artwork
 import com.google.android.apps.muzei.api.MuzeiArtSource
-import constantine.theodoridis.app.sunshine.MainActivity
 import constantine.theodoridis.app.sunshine.Utility
 import constantine.theodoridis.app.sunshine.data.WeatherContract
+import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
 
 class WeatherMuzeiSource : MuzeiArtSource("WeatherMuzeiSource") {
@@ -50,10 +50,10 @@ class WeatherMuzeiSource : MuzeiArtSource("WeatherMuzeiSource") {
 			val imageUrl = Utility.getImageUrlForWeatherCondition(weatherId)
 			if (imageUrl != null) {
 				publishArtwork(Artwork.Builder()
-								.imageUri(Uri.parse(imageUrl))
-								.title(desc)
-								.byline(location)
-								.viewIntent(Intent(this, MainActivity::class.java))
+						.imageUri(Uri.parse(imageUrl))
+						.title(desc)
+						.byline(location)
+						.viewIntent(Intent(this, ForecastsActivity::class.java))
 								.build())
 			}
 		}

@@ -25,8 +25,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.gcm.GcmListenerService
-import constantine.theodoridis.app.sunshine.MainActivity
 import constantine.theodoridis.app.sunshine.R
+import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -60,15 +60,15 @@ class MyGcmListenerService : GcmListenerService() {
 
 	private fun sendNotification(message: String) {
 		val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-		val contentIntent = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), 0)
+		val contentIntent = PendingIntent.getActivity(this, 0, Intent(this, ForecastsActivity::class.java), 0)
 		val largeIcon = BitmapFactory.decodeResource(this.resources, R.drawable.art_storm)
 		val mBuilder = NotificationCompat.Builder(this)
-						.setSmallIcon(R.drawable.art_clear)
-						.setLargeIcon(largeIcon)
-						.setContentTitle("Weather Alert!")
-						.setStyle(NotificationCompat.BigTextStyle().bigText(message))
-						.setContentText(message)
-						.setPriority(NotificationCompat.PRIORITY_HIGH)
+				.setSmallIcon(R.drawable.art_clear)
+				.setLargeIcon(largeIcon)
+				.setContentTitle("Weather Alert!")
+				.setStyle(NotificationCompat.BigTextStyle().bigText(message))
+				.setContentText(message)
+				.setPriority(NotificationCompat.PRIORITY_HIGH)
 		mBuilder.setContentIntent(contentIntent)
 		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build())
 	}

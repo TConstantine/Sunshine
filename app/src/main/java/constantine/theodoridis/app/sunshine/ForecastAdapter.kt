@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import constantine.theodoridis.app.sunshine.data.WeatherContract
+import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsFragment
 
 class ForecastAdapter(private val mContext: Context, private val mClickHandler: ForecastAdapterOnClickHandler, private val mEmptyView: View, choiceMode: Int) : RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder>() {
 	companion object {
@@ -92,7 +93,7 @@ class ForecastAdapter(private val mContext: Context, private val mClickHandler: 
 
 	override fun onBindViewHolder(forecastAdapterViewHolder: ForecastAdapterViewHolder, position: Int) {
 		cursor!!.moveToPosition(position)
-		val weatherId = cursor!!.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID)
+		val weatherId = cursor!!.getInt(ForecastsFragment.COL_WEATHER_CONDITION_ID)
 		val defaultImage: Int
 		val useLongToday: Boolean
 		when (getItemViewType(position)) {
@@ -109,22 +110,22 @@ class ForecastAdapter(private val mContext: Context, private val mClickHandler: 
 			forecastAdapterViewHolder.mIconView.setImageResource(defaultImage)
 		} else {
 			Glide.with(mContext)
-				.load(Utility.getArtUrlForWeatherCondition(mContext, weatherId))
-				.error(defaultImage)
-				.transition(withCrossFade())
-				.into(forecastAdapterViewHolder.mIconView)
+					.load(Utility.getArtUrlForWeatherCondition(mContext, weatherId))
+					.error(defaultImage)
+					.transition(withCrossFade())
+					.into(forecastAdapterViewHolder.mIconView)
 		}
 		ViewCompat.setTransitionName(forecastAdapterViewHolder.mIconView, "iconView$position")
-		val dateInMillis = cursor!!.getLong(ForecastFragment.COL_WEATHER_DATE)
+		val dateInMillis = cursor!!.getLong(ForecastsFragment.COL_WEATHER_DATE)
 		forecastAdapterViewHolder.mDateView.text = Utility.getFriendlyDayString(mContext, dateInMillis, useLongToday)
 		val description = Utility.getStringForWeatherCondition(mContext, weatherId)
 		forecastAdapterViewHolder.mDescriptionView.text = description
 		forecastAdapterViewHolder.mDescriptionView.contentDescription = mContext.getString(R.string.a11y_forecast, description)
-		val high = cursor!!.getDouble(ForecastFragment.COL_WEATHER_MAX_TEMP)
+		val high = cursor!!.getDouble(ForecastsFragment.COL_WEATHER_MAX_TEMP)
 		val highString = Utility.formatTemperature(mContext, high)
 		forecastAdapterViewHolder.mHighTempView.text = highString
 		forecastAdapterViewHolder.mHighTempView.contentDescription = mContext.getString(R.string.a11y_high_temp, highString)
-		val low = cursor!!.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP)
+		val low = cursor!!.getDouble(ForecastsFragment.COL_WEATHER_MIN_TEMP)
 		val lowString = Utility.formatTemperature(mContext, low)
 		forecastAdapterViewHolder.mLowTempView.text = lowString
 		forecastAdapterViewHolder.mLowTempView.contentDescription = mContext.getString(R.string.a11y_low_temp, lowString)
