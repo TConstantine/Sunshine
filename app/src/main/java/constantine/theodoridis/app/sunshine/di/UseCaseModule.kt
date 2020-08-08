@@ -30,8 +30,11 @@ import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.reposi
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.repository.TemperatureUnitRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 
 @Module
+@InstallIn(ActivityComponent::class)
 class UseCaseModule {
 	@Provides
 	fun provideGetGeoLocationUseCase(

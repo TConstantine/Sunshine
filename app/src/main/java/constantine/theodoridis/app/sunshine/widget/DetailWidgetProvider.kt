@@ -27,7 +27,7 @@ import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.TaskStackBuilder
 import constantine.theodoridis.app.sunshine.R
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
+import constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsActivity
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
 import constantine.theodoridis.app.sunshine.ui.weatherforecastdetails.WeatherForecastDetailsActivity
 

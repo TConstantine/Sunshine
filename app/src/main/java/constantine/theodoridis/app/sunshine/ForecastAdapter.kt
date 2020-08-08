@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import constantine.theodoridis.app.sunshine.data.WeatherContract
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsFragment
+import constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsFragment
 
 class ForecastAdapter(private val mContext: Context, private val mClickHandler: ForecastAdapterOnClickHandler, private val mEmptyView: View, choiceMode: Int) : RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder>() {
 	companion object {

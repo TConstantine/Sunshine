@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package constantine.theodoridis.app.sunshine.presentation.forecasts
+package constantine.theodoridis.app.sunshine.presentation.weatherforecastlist
 
 import android.content.Intent
 import android.net.Uri
@@ -31,14 +31,15 @@ import com.google.android.gms.common.GoogleApiAvailability
 import constantine.theodoridis.app.sunshine.ForecastAdapter
 import constantine.theodoridis.app.sunshine.R
 import constantine.theodoridis.app.sunshine.data.WeatherContract
-import constantine.theodoridis.app.sunshine.di.AndroidInjection
 import constantine.theodoridis.app.sunshine.domain.repository.LocationRepository
 import constantine.theodoridis.app.sunshine.gcm.RegistrationIntentService
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
 import constantine.theodoridis.app.sunshine.ui.weatherforecastdetails.WeatherForecastDetailsActivity
 import constantine.theodoridis.app.sunshine.ui.weatherforecastdetails.WeatherForecastDetailsFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ForecastsActivity : AppCompatActivity(), ForecastsFragment.Callback {
 	companion object {
 		private const val DETAIL_FRAGMENT_TAG = "DETAIL_FRAGMENT_TAG"
@@ -53,7 +54,6 @@ class ForecastsActivity : AppCompatActivity(), ForecastsFragment.Callback {
 	private var mLocation: String? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
-		AndroidInjection.inject(this)
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 		mLocation = locationRepository.getPreferredLocation()

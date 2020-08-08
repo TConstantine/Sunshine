@@ -19,7 +19,9 @@ package constantine.theodoridis.app.sunshine.ui.weatherforecastdetails
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import constantine.theodoridis.app.sunshine.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WeatherForecastDetailsActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

@@ -18,10 +18,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".ui.SunshineApplication"
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
         <activity
-          android:name=".presentation.forecasts.ForecastsActivity"
+          android:name=".presentation.weatherforecastlist.ForecastsActivity"
           android:label="@string/app_name"
             android:theme="@style/AppTheme.Main">
             <intent-filter>
@@ -32,20 +33,20 @@
       <activity
         android:name=".ui.weatherforecastdetails.WeatherForecastDetailsActivity"
         android:label="@string/title_activity_detail"
-        android:parentActivityName=".presentation.forecasts.ForecastsActivity"
+        android:parentActivityName=".presentation.weatherforecastlist.ForecastsActivity"
         android:theme="@style/AppTheme.Details">
         <meta-data
           android:name="android.support.PARENT_ACTIVITY"
-          android:value="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity" />
+          android:value="constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsActivity" />
       </activity>
         <activity
             android:name=".SettingsActivity"
           android:label="@string/title_activity_settings"
-          android:parentActivityName=".presentation.forecasts.ForecastsActivity"
+          android:parentActivityName=".presentation.weatherforecastlist.ForecastsActivity"
           android:theme="@style/SettingsTheme">
           <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity" />
+            android:value="constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsActivity" />
         </activity>
         <provider
             android:authorities="@string/content_authority"

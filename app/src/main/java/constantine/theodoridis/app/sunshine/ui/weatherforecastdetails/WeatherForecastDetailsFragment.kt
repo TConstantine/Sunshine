@@ -30,11 +30,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import constantine.theodoridis.app.sunshine.R
 import constantine.theodoridis.app.sunshine.data.WeatherContract
-import constantine.theodoridis.app.sunshine.di.AndroidInjection
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.presentation.WeatherForecastDetailsPresenter
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.presentation.WeatherForecastDetailsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class WeatherForecastDetailsFragment : Fragment() {
 	companion object {
 		internal const val DETAIL_URI = "URI"
@@ -115,7 +116,6 @@ class WeatherForecastDetailsFragment : Fragment() {
 	}
 
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
-		AndroidInjection.inject(this)
 		val vp = view!!.parent
 		if (vp is CardView) {
 			(vp as View).visibility = View.INVISIBLE

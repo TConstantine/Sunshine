@@ -22,7 +22,7 @@ import com.google.android.apps.muzei.api.Artwork
 import com.google.android.apps.muzei.api.MuzeiArtSource
 import constantine.theodoridis.app.sunshine.Utility
 import constantine.theodoridis.app.sunshine.data.WeatherContract
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
+import constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsActivity
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
 
 class WeatherMuzeiSource : MuzeiArtSource("WeatherMuzeiSource") {

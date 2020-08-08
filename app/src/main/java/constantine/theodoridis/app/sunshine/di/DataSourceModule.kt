@@ -27,8 +27,11 @@ import constantine.theodoridis.app.sunshine.data.datasource.ResourcesDataSource
 import constantine.theodoridis.app.sunshine.data.datasource.SharedPreferencesDataSource
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 
 @Module
+@InstallIn(ActivityComponent::class)
 class DataSourceModule {
 	@Provides
 	fun providePreferenceDataSource(sharedPreferences: SharedPreferences): PreferenceDataSource {
@@ -41,9 +44,7 @@ class DataSourceModule {
 	}
 
 	@Provides
-	fun provideDatabaseDataSource(
-			contentResolver: ContentResolver
-	): DatabaseDataSource {
+	fun provideDatabaseDataSource(contentResolver: ContentResolver): DatabaseDataSource {
 		return SQLiteDatabaseDataSource(contentResolver)
 	}
 }

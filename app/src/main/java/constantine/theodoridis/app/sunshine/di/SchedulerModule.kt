@@ -18,10 +18,13 @@ package constantine.theodoridis.app.sunshine.di
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 @Module
+@InstallIn(ActivityComponent::class)
 class SchedulerModule {
 	@Provides
 	fun provideScheduler(): Scheduler {

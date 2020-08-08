@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion buildVersions.targetSdk
@@ -12,8 +13,9 @@ android {
         targetSdkVersion buildVersions.targetSdk
         versionCode 6
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "constantine.theodoridis.app.sunshine.HiltTestRunner"
     }
+
     buildTypes {
         debug {
             testCoverageEnabled = true
@@ -24,22 +26,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     buildTypes.each {
         it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', OpenWeatherMapApiKey
     }
-    flavorDimensions "mock"
-    productFlavors {
-        mock {
-            applicationIdSuffix = ".mock"
-            dimension "mock"
-        }
-        production {
-        }
-    }
-    android.variantFilter { variant ->
-        if(variant.buildType.name == 'release' && variant.getFlavors().get(0).name == 'mock') {
-            variant.setIgnore(true)
-        }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -54,9 +48,9 @@ dependencies {
     implementation deps.support.constraintLayout
     implementation deps.rx.java
     implementation deps.rx.android
-    implementation deps.dagger.core
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    kapt deps.dagger.compiler
+    implementation dependency_injection.hilt.core
+    kapt dependency_injection.hilt.annotation_processor
     implementation deps.muzei.core
     implementation deps.glide.core
     implementation deps.playServices.gcm
@@ -73,4 +67,6 @@ dependencies {
     androidTestImplementation deps.espresso.contrib
     androidTestImplementation deps.espresso.intents
     androidTestImplementation deps.test.jUnitParams
+    androidTestImplementation dependency_injection.hilt.test
+    kaptAndroidTest dependency_injection.hilt.annotation_processor
 }

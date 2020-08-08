@@ -27,7 +27,7 @@ import android.widget.RemoteViews
 import constantine.theodoridis.app.sunshine.R
 import constantine.theodoridis.app.sunshine.Utility
 import constantine.theodoridis.app.sunshine.data.WeatherContract
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
+import constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsActivity
 
 class TodayWidgetIntentService : IntentService("TodayWidgetIntentService") {
 	companion object {

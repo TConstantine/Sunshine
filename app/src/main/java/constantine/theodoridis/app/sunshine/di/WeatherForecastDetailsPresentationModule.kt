@@ -17,10 +17,7 @@
 package constantine.theodoridis.app.sunshine.di
 
 import constantine.theodoridis.app.sunshine.domain.transform.Transformer
-import constantine.theodoridis.app.sunshine.domain.usecase.GetGeoLocationUseCase
 import constantine.theodoridis.app.sunshine.domain.usecase.UseCase
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsContract
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsPresenter
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.loadweatherforecastdetails.LoadWeatherForecastDetailsRequest
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.loadweatherforecastdetails.LoadWeatherForecastDetailsResponse
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.presentation.WeatherForecastDetailsPresenter
@@ -28,26 +25,22 @@ import constantine.theodoridis.app.sunshine.weatherforecastdetails.presentation.
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.presentation.WeatherForecastDetailsViewModel
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
 import io.reactivex.Scheduler
 
 // TODO: Remove constructor with view, when ForecastsPresenter is transformed into ViewModel
 @Module
+@InstallIn(FragmentComponent::class)
 class WeatherForecastDetailsPresentationModule {
-	private lateinit var view: ForecastsContract.View
-
-	constructor(view: ForecastsContract.View) {
-		this.view = view
-	}
-
-	constructor()
-
-	@Provides
-	fun provideForecastsContractPresenter(
-			getGeoLocationUseCase: GetGeoLocationUseCase,
-			mainScheduler: Scheduler
-	): ForecastsContract.Presenter {
-		return ForecastsPresenter(view, getGeoLocationUseCase, mainScheduler)
-	}
+//	@Provides
+//	fun provideForecastsContractPresenter(
+//			view: ForecastsContract.View,
+//			getGeoLocationUseCase: GetGeoLocationUseCase,
+//			mainScheduler: Scheduler
+//	): ForecastsContract.Presenter {
+//		return ForecastsPresenter(view, getGeoLocationUseCase, mainScheduler)
+//	}
 
 	@Provides
 	fun provideWeatherForecastDetailsPresenter(

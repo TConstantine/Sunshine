@@ -23,26 +23,29 @@ import android.content.res.Resources
 import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val context: Context) {
+@InstallIn(ApplicationComponent::class)
+class ApplicationModule() {
+	@Singleton
 	@Provides
-	fun provideContext(): Context {
-		return context
-	}
-
-	@Provides
-	fun provideResources(context: Context): Resources {
+	fun provideResources(@ApplicationContext context: Context): Resources {
 		return context.resources
 	}
 
+	@Singleton
 	@Provides
-	fun provideSharedPreferences(context: Context): SharedPreferences {
+	fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
 		return PreferenceManager.getDefaultSharedPreferences(context)
 	}
 
+	@Singleton
 	@Provides
-	fun provideContentResolver(context: Context): ContentResolver {
+	fun provideContentResolver(@ApplicationContext context: Context): ContentResolver {
 		return context.contentResolver
 	}
 }

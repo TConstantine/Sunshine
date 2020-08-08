@@ -19,7 +19,7 @@ package constantine.theodoridis.app.sunshine.gcm
 import android.app.IntentService
 import android.content.Intent
 import android.preference.PreferenceManager
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
+import constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsActivity
 
 class RegistrationIntentService : IntentService(TAG) {
 	companion object {

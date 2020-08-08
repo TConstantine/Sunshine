@@ -1,0 +1,15 @@
+ext.dependency_injection = [:]
+
+def versions = [:]
+versions.hilt = '2.28-alpha'
+
+def dependency_injection = [:]
+
+def hilt = [:]
+hilt.annotation_processor = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+hilt.core = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.gradle = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+hilt.test = "com.google.dagger:hilt-android-testing:$versions.hilt"
+dependency_injection.hilt = hilt
+
+ext.dependency_injection = dependency_injection

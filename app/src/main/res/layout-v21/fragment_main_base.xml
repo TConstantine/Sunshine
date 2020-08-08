@@ -4,7 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:elevation="@dimen/appbar_elevation"
-  tools:context="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsFragment">
+  tools:context="constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsFragment">
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recyclerViewForecast"

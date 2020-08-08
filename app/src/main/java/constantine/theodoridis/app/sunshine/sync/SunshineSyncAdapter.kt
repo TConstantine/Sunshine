@@ -37,7 +37,7 @@ import constantine.theodoridis.app.sunshine.R
 import constantine.theodoridis.app.sunshine.Utility
 import constantine.theodoridis.app.sunshine.data.WeatherContract
 import constantine.theodoridis.app.sunshine.muzei.WeatherMuzeiSource
-import constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsActivity
+import constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsActivity
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader

@@ -48,7 +48,7 @@
         android:layout_centerInParent="true"/>
     <fragment
         android:id="@+id/fragment_forecast"
-      android:name="constantine.theodoridis.app.sunshine.presentation.forecasts.ForecastsFragment"
+      android:name="constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.ForecastsFragment"
       android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_alignEnd="@id/layout_center"

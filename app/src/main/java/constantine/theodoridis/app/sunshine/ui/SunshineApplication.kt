@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2018 Constantine Theodoridis
+ *  Copyright (C) 2020 Constantine Theodoridis
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,18 +14,10 @@
  *  limitations under the License.
  */
 
-package constantine.theodoridis.app.sunshine.presentation.forecasts
+package constantine.theodoridis.app.sunshine.ui
 
-interface ForecastsContract {
-	interface View {
-		fun displayInvalidLocationError()
-		fun displayMapLocation(geoLocation: String)
-		fun displaySettingsScreen()
-	}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-	interface Presenter {
-		fun onMapLocationOptionClick()
-		fun onSettingsOptionClick()
-		fun unSubscribe()
-	}
-}
+@HiltAndroidApp
+class SunshineApplication : Application()
