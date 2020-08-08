@@ -17,5 +17,5 @@
 package constantine.theodoridis.app.sunshine.domain.entity
 
 enum class Direction {
-	N, NE, E, SE, S, SW, W, NW
+  N, NE, E, SE, S, SW, W, NW
 }

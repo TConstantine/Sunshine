@@ -17,16 +17,16 @@
 package constantine.theodoridis.app.sunshine.weatherforecastdetails.presentation
 
 data class WeatherForecastDetailsViewModel(
-		val date: String,
-		val iconId: Int,
-		val iconDescription: String,
-		val forecast: String,
-		val forecastDescription: String,
-		val maxTemperature: String,
-		val maxTemperatureDescription: String,
-		val minTemperature: String,
-		val minTemperatureDescription: String,
-		val humidity: String,
-		val pressure: String,
-		val wind: String
+  val date: String,
+  val iconId: Int,
+  val iconDescription: String,
+  val forecast: String,
+  val forecastDescription: String,
+  val maxTemperature: String,
+  val maxTemperatureDescription: String,
+  val minTemperature: String,
+  val minTemperatureDescription: String,
+  val humidity: String,
+  val pressure: String,
+  val wind: String
 )

@@ -17,13 +17,13 @@
 package constantine.theodoridis.app.sunshine.domain.entity
 
 data class WeatherForecast(
-		val dateInMilliseconds: Long,
-		val iconId: Int,
-		val forecast: String,
-		val maxTemperature: Float,
-		val minTemperature: Float,
-		val humidity: Float,
-		val pressure: Float,
-		val windSpeed: Float,
-		val windDegrees: Float
+  val dateInMilliseconds: Long,
+  val iconId: Int,
+  val forecast: String,
+  val maxTemperature: Float,
+  val minTemperature: Float,
+  val humidity: Float,
+  val pressure: Float,
+  val windSpeed: Float,
+  val windDegrees: Float
 )

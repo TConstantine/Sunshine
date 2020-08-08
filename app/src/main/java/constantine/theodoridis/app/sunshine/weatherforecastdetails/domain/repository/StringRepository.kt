@@ -17,13 +17,13 @@
 package constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.repository
 
 interface StringRepository {
-	fun getIconDescriptionLabel(): String
-	fun getForecastDescriptionLabel(): String
-	fun getMaxTemperatureDescriptionLabel(): String
-	fun getMinTemperatureDescriptionLabel(): String
-	fun getPressureUnit(): String
-	fun getToday(): String
-	fun getTomorrow(): String
-	fun getWindSpeedUnitImperial(): String
-	fun getWindSpeedUnitMetric(): String
+  fun getIconDescriptionLabel(): String
+  fun getForecastDescriptionLabel(): String
+  fun getMaxTemperatureDescriptionLabel(): String
+  fun getMinTemperatureDescriptionLabel(): String
+  fun getPressureUnit(): String
+  fun getToday(): String
+  fun getTomorrow(): String
+  fun getWindSpeedUnitImperial(): String
+  fun getWindSpeedUnitMetric(): String
 }

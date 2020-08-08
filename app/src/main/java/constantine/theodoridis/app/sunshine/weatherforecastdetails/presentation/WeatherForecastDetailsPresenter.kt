@@ -30,33 +30,33 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
 class WeatherForecastDetailsPresenter(
-		private val useCase: UseCase<LoadWeatherForecastDetailsRequest, LoadWeatherForecastDetailsResponse>,
-		private val transformer: Transformer<LoadWeatherForecastDetailsResponse, WeatherForecastDetailsViewModel>,
-		private val scheduler: Scheduler
+  private val useCase: UseCase<LoadWeatherForecastDetailsRequest, LoadWeatherForecastDetailsResponse>,
+  private val transformer: Transformer<LoadWeatherForecastDetailsResponse, WeatherForecastDetailsViewModel>,
+  private val scheduler: Scheduler
 ) : ViewModel() {
-	private val compositeDisposable = CompositeDisposable()
-	private val weatherForecastDetailsObservable = MutableLiveData<WeatherForecastDetailsViewModel>()
-
-	fun loadWeatherForecastDetails(location: String, date: Long) {
-		compositeDisposable.add(Single.fromCallable { useCase.execute(LoadWeatherForecastDetailsRequest(location, date)) }
-				.subscribeOn(Schedulers.io())
-				.observeOn(scheduler)
-				.subscribeWith(object : DisposableSingleObserver<LoadWeatherForecastDetailsResponse>() {
-					override fun onSuccess(response: LoadWeatherForecastDetailsResponse) {
-						weatherForecastDetailsObservable.postValue(transformer.transform(response))
-					}
-
-					override fun onError(e: Throwable) {
-					}
-				})
-		)
-	}
-
-	fun weatherForecastDetails(): LiveData<WeatherForecastDetailsViewModel> {
-		return weatherForecastDetailsObservable
-	}
-
-	override fun onCleared() {
-		compositeDisposable.clear()
-	}
+  private val compositeDisposable = CompositeDisposable()
+  private val weatherForecastDetailsObservable = MutableLiveData<WeatherForecastDetailsViewModel>()
+  
+  fun loadWeatherForecastDetails(location: String, date: Long) {
+    compositeDisposable.add(Single.fromCallable { useCase.execute(LoadWeatherForecastDetailsRequest(location, date)) }
+      .subscribeOn(Schedulers.io())
+      .observeOn(scheduler)
+      .subscribeWith(object : DisposableSingleObserver<LoadWeatherForecastDetailsResponse>() {
+        override fun onSuccess(response: LoadWeatherForecastDetailsResponse) {
+          weatherForecastDetailsObservable.postValue(transformer.transform(response))
+        }
+        
+        override fun onError(e: Throwable) {
+        }
+      })
+    )
+  }
+  
+  fun weatherForecastDetails(): LiveData<WeatherForecastDetailsViewModel> {
+    return weatherForecastDetailsObservable
+  }
+  
+  override fun onCleared() {
+    compositeDisposable.clear()
+  }
 }

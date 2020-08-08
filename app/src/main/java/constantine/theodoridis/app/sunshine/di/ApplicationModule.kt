@@ -30,7 +30,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-class ApplicationModule() {
+class ApplicationModule {
 	@Singleton
 	@Provides
 	fun provideResources(@ApplicationContext context: Context): Resources {

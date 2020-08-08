@@ -19,5 +19,5 @@ package constantine.theodoridis.app.sunshine.data.database
 import constantine.theodoridis.app.sunshine.data.database.model.WeatherForecastDatabaseModel
 
 interface DatabaseDataSource {
-	fun getWeatherForecast(location: String, date: Long): WeatherForecastDatabaseModel
+  fun getWeatherForecast(location: String, date: Long): WeatherForecastDatabaseModel
 }

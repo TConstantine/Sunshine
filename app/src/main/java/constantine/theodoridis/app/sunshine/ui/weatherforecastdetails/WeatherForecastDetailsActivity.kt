@@ -23,19 +23,19 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WeatherForecastDetailsActivity : AppCompatActivity() {
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_weather_forecast_details)
-		if (savedInstanceState == null) {
-			val arguments = Bundle()
-			arguments.putParcelable(WeatherForecastDetailsFragment.DETAIL_URI, intent.data)
-			arguments.putBoolean(WeatherForecastDetailsFragment.DETAIL_TRANSITION_ANIMATION, true)
-			val fragment = WeatherForecastDetailsFragment()
-			fragment.arguments = arguments
-			supportFragmentManager.beginTransaction()
-					.add(R.id.weather_detail_container, fragment)
-					.commit()
-			supportPostponeEnterTransition()
-		}
-	}
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_weather_forecast_details)
+    if (savedInstanceState == null) {
+      val arguments = Bundle()
+      arguments.putParcelable(WeatherForecastDetailsFragment.DETAIL_URI, intent.data)
+      arguments.putBoolean(WeatherForecastDetailsFragment.DETAIL_TRANSITION_ANIMATION, true)
+      val fragment = WeatherForecastDetailsFragment()
+      fragment.arguments = arguments
+      supportFragmentManager.beginTransaction()
+        .add(R.id.weather_detail_container, fragment)
+        .commit()
+      supportPostponeEnterTransition()
+    }
+  }
 }

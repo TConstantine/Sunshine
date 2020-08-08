@@ -29,31 +29,21 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
 import io.reactivex.Scheduler
 
-// TODO: Remove constructor with view, when ForecastsPresenter is transformed into ViewModel
 @Module
 @InstallIn(FragmentComponent::class)
 class WeatherForecastDetailsPresentationModule {
-//	@Provides
-//	fun provideForecastsContractPresenter(
-//			view: ForecastsContract.View,
-//			getGeoLocationUseCase: GetGeoLocationUseCase,
-//			mainScheduler: Scheduler
-//	): ForecastsContract.Presenter {
-//		return ForecastsPresenter(view, getGeoLocationUseCase, mainScheduler)
-//	}
-
-	@Provides
-	fun provideWeatherForecastDetailsPresenter(
-			useCase: UseCase<LoadWeatherForecastDetailsRequest, LoadWeatherForecastDetailsResponse>,
-			transformer: Transformer<LoadWeatherForecastDetailsResponse, WeatherForecastDetailsViewModel>,
-			scheduler: Scheduler
-	): WeatherForecastDetailsPresenter {
-		return WeatherForecastDetailsPresenter(useCase, transformer, scheduler)
-	}
-
-	@Provides
-	fun provideWeatherForecastDetailsTransformer(
-	): Transformer<LoadWeatherForecastDetailsResponse, WeatherForecastDetailsViewModel> {
-		return WeatherForecastDetailsTransformer()
-	}
+  @Provides
+  fun provideWeatherForecastDetailsPresenter(
+    useCase: UseCase<LoadWeatherForecastDetailsRequest, LoadWeatherForecastDetailsResponse>,
+    transformer: Transformer<LoadWeatherForecastDetailsResponse, WeatherForecastDetailsViewModel>,
+    scheduler: Scheduler
+  ): WeatherForecastDetailsPresenter {
+    return WeatherForecastDetailsPresenter(useCase, transformer, scheduler)
+  }
+  
+  @Provides
+  fun provideWeatherForecastDetailsTransformer(
+  ): Transformer<LoadWeatherForecastDetailsResponse, WeatherForecastDetailsViewModel> {
+    return WeatherForecastDetailsTransformer()
+  }
 }

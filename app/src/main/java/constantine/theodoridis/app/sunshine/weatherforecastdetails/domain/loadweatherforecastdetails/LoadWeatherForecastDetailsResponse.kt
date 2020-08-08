@@ -17,21 +17,21 @@
 package constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.loadweatherforecastdetails
 
 data class LoadWeatherForecastDetailsResponse(
-		val dayOfWeek: String,
-		val month: String,
-		val dayOfMonth: Int,
-		val iconId: Int,
-		val iconDescriptionLabel: String,
-		val forecast: String,
-		val forecastDescriptionLabel: String,
-		val maxTemperature: Float,
-		val maxTemperatureDescriptionLabel: String,
-		val minTemperature: Float,
-		val minTemperatureDescriptionLabel: String,
-		val humidity: Float,
-		val pressure: Float,
-		val pressureUnit: String,
-		val windSpeed: Float,
-		val windSpeedUnit: String,
-		val windDirection: String
+  val dayOfWeek: String,
+  val month: String,
+  val dayOfMonth: Int,
+  val iconId: Int,
+  val iconDescriptionLabel: String,
+  val forecast: String,
+  val forecastDescriptionLabel: String,
+  val maxTemperature: Float,
+  val maxTemperatureDescriptionLabel: String,
+  val minTemperature: Float,
+  val minTemperatureDescriptionLabel: String,
+  val humidity: Float,
+  val pressure: Float,
+  val pressureUnit: String,
+  val windSpeed: Float,
+  val windSpeedUnit: String,
+  val windDirection: String
 )

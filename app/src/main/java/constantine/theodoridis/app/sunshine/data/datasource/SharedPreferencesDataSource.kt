@@ -19,7 +19,7 @@ package constantine.theodoridis.app.sunshine.data.datasource
 import android.content.SharedPreferences
 
 class SharedPreferencesDataSource(private val sharedPreferences: SharedPreferences) : PreferenceDataSource {
-	override fun getString(key: String, defaultKey: String): String? {
-		return sharedPreferences.getString(key, defaultKey)
-	}
+  override fun getString(key: String, defaultKey: String): String? {
+    return sharedPreferences.getString(key, defaultKey)
+  }
 }

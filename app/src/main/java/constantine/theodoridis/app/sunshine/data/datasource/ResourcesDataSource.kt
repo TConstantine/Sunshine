@@ -19,7 +19,7 @@ package constantine.theodoridis.app.sunshine.data.datasource
 import android.content.res.Resources
 
 class ResourcesDataSource(private val resources: Resources) : ResourceDataSource {
-	override fun getString(resourceId: Int): String {
-		return resources.getString(resourceId)
-	}
+  override fun getString(resourceId: Int): String {
+    return resources.getString(resourceId)
+  }
 }

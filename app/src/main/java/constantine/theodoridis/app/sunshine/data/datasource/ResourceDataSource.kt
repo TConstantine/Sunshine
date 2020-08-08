@@ -17,5 +17,5 @@
 package constantine.theodoridis.app.sunshine.data.datasource
 
 interface ResourceDataSource {
-	fun getString(resourceId: Int): String
+  fun getString(resourceId: Int): String
 }

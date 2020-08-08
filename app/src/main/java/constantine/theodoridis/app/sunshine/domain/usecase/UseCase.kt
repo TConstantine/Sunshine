@@ -17,5 +17,5 @@
 package constantine.theodoridis.app.sunshine.domain.usecase
 
 interface UseCase<P, R> {
-	fun execute(request: P): R
+  fun execute(request: P): R
 }

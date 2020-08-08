@@ -17,5 +17,5 @@
 package constantine.theodoridis.app.sunshine.domain.transform
 
 interface Transformer<INPUT, OUTPUT> {
-	fun transform(input: INPUT): OUTPUT
+  fun transform(input: INPUT): OUTPUT
 }

@@ -17,5 +17,5 @@
 package constantine.theodoridis.app.sunshine.domain.usecase
 
 interface GetGeoLocationUseCase {
-	fun getGeoLocation(): String
+  fun getGeoLocation(): String
 }

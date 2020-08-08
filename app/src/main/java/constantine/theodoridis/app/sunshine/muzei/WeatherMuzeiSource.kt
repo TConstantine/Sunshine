@@ -26,37 +26,48 @@ import constantine.theodoridis.app.sunshine.presentation.weatherforecastlist.For
 import constantine.theodoridis.app.sunshine.sync.SunshineSyncAdapter
 
 class WeatherMuzeiSource : MuzeiArtSource("WeatherMuzeiSource") {
-	companion object {
-		private val FORECAST_COLUMNS = arrayOf(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID, WeatherContract.WeatherEntry.COLUMN_SHORT_DESC)
-		private const val INDEX_WEATHER_ID = 0
-		private const val INDEX_SHORT_DESC = 1
-	}
-
-	override fun onHandleIntent(intent: Intent?) {
-		super.onHandleIntent(intent)
-		val dataUpdated = intent != null && SunshineSyncAdapter.ACTION_DATA_UPDATED == intent.action
-		if (dataUpdated && isEnabled) {
-			onUpdate(MuzeiArtSource.UPDATE_REASON_OTHER)
-		}
-	}
-
-	override fun onUpdate(reason: Int) {
-		val location = Utility.getPreferredLocation(this)
-		val weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(location, System.currentTimeMillis())
-		val cursor = contentResolver.query(weatherForLocationUri, FORECAST_COLUMNS, null, null, WeatherContract.WeatherEntry.COLUMN_DATE + " ASC")
-		if (cursor!!.moveToFirst()) {
-			val weatherId = cursor.getInt(INDEX_WEATHER_ID)
-			val desc = cursor.getString(INDEX_SHORT_DESC)
-			val imageUrl = Utility.getImageUrlForWeatherCondition(weatherId)
-			if (imageUrl != null) {
-				publishArtwork(Artwork.Builder()
-						.imageUri(Uri.parse(imageUrl))
-						.title(desc)
-						.byline(location)
-						.viewIntent(Intent(this, ForecastsActivity::class.java))
-								.build())
-			}
-		}
-		cursor.close()
-	}
+  companion object {
+    private val FORECAST_COLUMNS = arrayOf(
+      WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
+      WeatherContract.WeatherEntry.COLUMN_SHORT_DESC
+    )
+    private const val INDEX_WEATHER_ID = 0
+    private const val INDEX_SHORT_DESC = 1
+  }
+  
+  override fun onHandleIntent(intent: Intent?) {
+    super.onHandleIntent(intent)
+    val dataUpdated = intent != null && SunshineSyncAdapter.ACTION_DATA_UPDATED == intent.action
+    if (dataUpdated && isEnabled) {
+      onUpdate(MuzeiArtSource.UPDATE_REASON_OTHER)
+    }
+  }
+  
+  override fun onUpdate(reason: Int) {
+    val location = Utility.getPreferredLocation(this)
+    val weatherForLocationUri = WeatherContract
+      .WeatherEntry
+      .buildWeatherLocationWithStartDate(location, System.currentTimeMillis())
+    val cursor = contentResolver.query(
+      weatherForLocationUri,
+      FORECAST_COLUMNS,
+      null,
+      null,
+      WeatherContract.WeatherEntry.COLUMN_DATE + " ASC"
+    )
+    if (cursor!!.moveToFirst()) {
+      val weatherId = cursor.getInt(INDEX_WEATHER_ID)
+      val desc = cursor.getString(INDEX_SHORT_DESC)
+      val imageUrl = Utility.getImageUrlForWeatherCondition(weatherId)
+      if (imageUrl != null) {
+        publishArtwork(Artwork.Builder()
+          .imageUri(Uri.parse(imageUrl))
+          .title(desc)
+          .byline(location)
+          .viewIntent(Intent(this, ForecastsActivity::class.java))
+          .build())
+      }
+    }
+    cursor.close()
+  }
 }

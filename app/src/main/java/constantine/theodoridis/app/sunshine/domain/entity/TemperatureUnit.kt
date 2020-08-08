@@ -17,5 +17,5 @@
 package constantine.theodoridis.app.sunshine.domain.entity
 
 enum class TemperatureUnit {
-	IMPERIAL, METRIC
+  IMPERIAL, METRIC
 }

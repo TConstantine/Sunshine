@@ -21,20 +21,20 @@ import android.content.Intent
 import android.os.IBinder
 
 class SunshineSyncService : Service() {
-	companion object {
-		private val sSyncAdapterLock = Any()
-		private var sSunshineSyncAdapter: SunshineSyncAdapter? = null
-	}
-
-	override fun onCreate() {
-		synchronized(sSyncAdapterLock) {
-			if (sSunshineSyncAdapter == null) {
-				sSunshineSyncAdapter = SunshineSyncAdapter(applicationContext, true)
-			}
-		}
-	}
-
-	override fun onBind(intent: Intent): IBinder? {
-		return sSunshineSyncAdapter!!.syncAdapterBinder
-	}
+  companion object {
+    private val sSyncAdapterLock = Any()
+    private var sSunshineSyncAdapter: SunshineSyncAdapter? = null
+  }
+  
+  override fun onCreate() {
+    synchronized(sSyncAdapterLock) {
+      if (sSunshineSyncAdapter == null) {
+        sSunshineSyncAdapter = SunshineSyncAdapter(applicationContext, true)
+      }
+    }
+  }
+  
+  override fun onBind(intent: Intent): IBinder? {
+    return sSunshineSyncAdapter!!.syncAdapterBinder
+  }
 }

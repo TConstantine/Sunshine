@@ -22,22 +22,22 @@ import constantine.theodoridis.app.sunshine.data.datasource.ResourceDataSource
 import constantine.theodoridis.app.sunshine.domain.repository.LocationRepository
 
 class GetGeoLocation(private val resourceDataSource: ResourceDataSource,
-										 private val preferenceDataSource: PreferenceDataSource,
-										 private val locationRepository: LocationRepository) :
-		GetGeoLocationUseCase {
-	companion object {
-		const val GEOLOCATION_PREFIX = "geo:"
-		const val COMMA_SEPARATOR = ","
-	}
-
-	override fun getGeoLocation(): String {
-		val locationSetting = preferenceDataSource.getString(
-				resourceDataSource.getString(R.string.preference_location_key),
-				resourceDataSource.getString(R.string.preference_location_key_default))
-		if (locationRepository.hasLocation(locationSetting!!)) {
-			val location = locationRepository.getLocation(locationSetting)
-			return "$GEOLOCATION_PREFIX${location.latitude}$COMMA_SEPARATOR${location.longitude}"
-		}
-		return ""
-	}
+                     private val preferenceDataSource: PreferenceDataSource,
+                     private val locationRepository: LocationRepository) :
+  GetGeoLocationUseCase {
+  companion object {
+    const val GEOLOCATION_PREFIX = "geo:"
+    const val COMMA_SEPARATOR = ","
+  }
+  
+  override fun getGeoLocation(): String {
+    val locationSetting = preferenceDataSource.getString(
+      resourceDataSource.getString(R.string.preference_location_key),
+      resourceDataSource.getString(R.string.preference_location_key_default))
+    if (locationRepository.hasLocation(locationSetting!!)) {
+      val location = locationRepository.getLocation(locationSetting)
+      return "$GEOLOCATION_PREFIX${location.latitude}$COMMA_SEPARATOR${location.longitude}"
+    }
+    return ""
+  }
 }

@@ -13,8 +13,13 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.11.0-RC1"
+}
+
 allprojects {
     addRepos(repositories)
+    apply from: "$rootDir/static_analysis.gradle"
 }
 
 task clean(type: Delete) {

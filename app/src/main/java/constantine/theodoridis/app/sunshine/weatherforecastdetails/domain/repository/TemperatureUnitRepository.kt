@@ -19,5 +19,5 @@ package constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.repos
 import constantine.theodoridis.app.sunshine.domain.entity.TemperatureUnit
 
 interface TemperatureUnitRepository {
-	fun getTemperatureUnit(): TemperatureUnit
+  fun getTemperatureUnit(): TemperatureUnit
 }

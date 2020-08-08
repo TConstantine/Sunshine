@@ -17,6 +17,6 @@
 package constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.loadweatherforecastdetails
 
 data class LoadWeatherForecastDetailsRequest(
-		val location: String,
-		val dateInMilliseconds: Long
+  val location: String,
+  val dateInMilliseconds: Long
 )

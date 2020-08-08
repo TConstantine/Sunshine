@@ -29,51 +29,51 @@ import constantine.theodoridis.app.sunshine.data.WeatherContract.WeatherEntry.Co
 import constantine.theodoridis.app.sunshine.data.database.model.WeatherForecastDatabaseModel
 
 class SQLiteDatabaseDataSource(private val contentResolver: ContentResolver) : DatabaseDataSource {
-	override fun getWeatherForecast(location: String, date: Long): WeatherForecastDatabaseModel {
-		val locationCursor = contentResolver.query(
-				WeatherContract.LocationEntry.CONTENT_URI,
-				arrayOf(WeatherContract.LocationEntry.ID),
-				"${WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING} = ?",
-				arrayOf(location),
-				null
-		)
-		if (locationCursor != null) {
-			locationCursor.moveToFirst()
-			val locationId = locationCursor.getInt(locationCursor.getColumnIndex(WeatherContract.LocationEntry.ID))
-			locationCursor.close()
-			val weatherForecastCursor = contentResolver.query(
-					WeatherContract.WeatherEntry.CONTENT_URI,
-					arrayOf(
-							COLUMN_DATE,
-							COLUMN_WEATHER_ID,
-							COLUMN_MAX_TEMP,
-							COLUMN_MIN_TEMP,
-							COLUMN_HUMIDITY,
-							COLUMN_PRESSURE,
-							COLUMN_WIND_SPEED,
-							COLUMN_DEGREES
-					),
-					"${WeatherContract.WeatherEntry.COLUMN_LOC_KEY} = ? AND $COLUMN_DATE = ?",
-					arrayOf(locationId.toString(), date.toString()),
-					null)
-			if (weatherForecastCursor != null) {
-				weatherForecastCursor.moveToFirst()
-				val weatherForecast = WeatherForecastDatabaseModel(
-						locationSettingId = locationId,
-						dateInMilliseconds = weatherForecastCursor.getLong(weatherForecastCursor.getColumnIndex(COLUMN_DATE)),
-						weatherId = weatherForecastCursor.getInt(weatherForecastCursor.getColumnIndex(COLUMN_WEATHER_ID)),
-						maxTemperature = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_MAX_TEMP)),
-						minTemperature = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_MIN_TEMP)),
-						humidity = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_HUMIDITY)),
-						pressure = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_PRESSURE)),
-						windSpeed = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_WIND_SPEED)),
-						windDegrees = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_DEGREES))
-				)
-				weatherForecastCursor.close()
-				return weatherForecast
-			}
-			throw NullPointerException("Could not get weather forecast. Cursor is null")
-		}
-		throw NullPointerException("Could not get location id. Cursor is null")
-	}
+  override fun getWeatherForecast(location: String, date: Long): WeatherForecastDatabaseModel {
+    val locationCursor = contentResolver.query(
+      WeatherContract.LocationEntry.CONTENT_URI,
+      arrayOf(WeatherContract.LocationEntry.ID),
+      "${WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING} = ?",
+      arrayOf(location),
+      null
+    )
+    if (locationCursor != null) {
+      locationCursor.moveToFirst()
+      val locationId = locationCursor.getInt(locationCursor.getColumnIndex(WeatherContract.LocationEntry.ID))
+      locationCursor.close()
+      val weatherForecastCursor = contentResolver.query(
+        WeatherContract.WeatherEntry.CONTENT_URI,
+        arrayOf(
+          COLUMN_DATE,
+          COLUMN_WEATHER_ID,
+          COLUMN_MAX_TEMP,
+          COLUMN_MIN_TEMP,
+          COLUMN_HUMIDITY,
+          COLUMN_PRESSURE,
+          COLUMN_WIND_SPEED,
+          COLUMN_DEGREES
+        ),
+        "${WeatherContract.WeatherEntry.COLUMN_LOC_KEY} = ? AND $COLUMN_DATE = ?",
+        arrayOf(locationId.toString(), date.toString()),
+        null)
+      if (weatherForecastCursor != null) {
+        weatherForecastCursor.moveToFirst()
+        val weatherForecast = WeatherForecastDatabaseModel(
+          locationSettingId = locationId,
+          dateInMilliseconds = weatherForecastCursor.getLong(weatherForecastCursor.getColumnIndex(COLUMN_DATE)),
+          weatherId = weatherForecastCursor.getInt(weatherForecastCursor.getColumnIndex(COLUMN_WEATHER_ID)),
+          maxTemperature = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_MAX_TEMP)),
+          minTemperature = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_MIN_TEMP)),
+          humidity = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_HUMIDITY)),
+          pressure = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_PRESSURE)),
+          windSpeed = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_WIND_SPEED)),
+          windDegrees = weatherForecastCursor.getFloat(weatherForecastCursor.getColumnIndex(COLUMN_DEGREES))
+        )
+        weatherForecastCursor.close()
+        return weatherForecast
+      }
+      throw NullPointerException("Could not get weather forecast. Cursor is null")
+    }
+    throw NullPointerException("Could not get location id. Cursor is null")
+  }
 }

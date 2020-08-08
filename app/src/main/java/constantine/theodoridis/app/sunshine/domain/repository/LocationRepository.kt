@@ -19,7 +19,7 @@ package constantine.theodoridis.app.sunshine.domain.repository
 import constantine.theodoridis.app.sunshine.data.model.Location
 
 interface LocationRepository {
-	fun getPreferredLocation(): String?
-	fun getLocation(locationSetting: String): Location
-	fun hasLocation(locationSetting: String): Boolean
+  fun getPreferredLocation(): String?
+  fun getLocation(locationSetting: String): Location
+  fun hasLocation(locationSetting: String): Boolean
 }

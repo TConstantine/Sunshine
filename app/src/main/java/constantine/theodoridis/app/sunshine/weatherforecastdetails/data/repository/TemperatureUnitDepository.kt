@@ -23,26 +23,26 @@ import constantine.theodoridis.app.sunshine.domain.entity.TemperatureUnit
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.repository.TemperatureUnitRepository
 
 class TemperatureUnitDepository(
-		private val resourceDataSource: ResourceDataSource,
-		private val preferenceDataSource: PreferenceDataSource
+  private val resourceDataSource: ResourceDataSource,
+  private val preferenceDataSource: PreferenceDataSource
 ) : TemperatureUnitRepository {
-	companion object {
-		private const val IMPERIAL = "imperial"
-	}
-
-	override fun getTemperatureUnit(): TemperatureUnit {
-		return transformTemperatureUnit(
-				preferenceDataSource.getString(
-						resourceDataSource.getString(R.string.preference_temperature_unit_key),
-						resourceDataSource.getString(R.string.temperature_unit_metric)
-				)
-		)
-	}
-
-	private fun transformTemperatureUnit(temperatureUnit: String?): TemperatureUnit {
-		return when (temperatureUnit) {
-			IMPERIAL -> TemperatureUnit.IMPERIAL
-			else -> TemperatureUnit.METRIC
-		}
-	}
+  companion object {
+    private const val IMPERIAL = "imperial"
+  }
+  
+  override fun getTemperatureUnit(): TemperatureUnit {
+    return transformTemperatureUnit(
+      preferenceDataSource.getString(
+        resourceDataSource.getString(R.string.preference_temperature_unit_key),
+        resourceDataSource.getString(R.string.temperature_unit_metric)
+      )
+    )
+  }
+  
+  private fun transformTemperatureUnit(temperatureUnit: String?): TemperatureUnit {
+    return when (temperatureUnit) {
+      IMPERIAL -> TemperatureUnit.IMPERIAL
+      else -> TemperatureUnit.METRIC
+    }
+  }
 }

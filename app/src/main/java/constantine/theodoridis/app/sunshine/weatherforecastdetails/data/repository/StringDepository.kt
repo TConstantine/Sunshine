@@ -21,39 +21,39 @@ import constantine.theodoridis.app.sunshine.data.datasource.ResourceDataSource
 import constantine.theodoridis.app.sunshine.weatherforecastdetails.domain.repository.StringRepository
 
 class StringDepository(private val resourceDataSource: ResourceDataSource) : StringRepository {
-	override fun getIconDescriptionLabel(): String {
-		return resourceDataSource.getString(R.string.icon_description_label)
-	}
-
-	override fun getForecastDescriptionLabel(): String {
-		return resourceDataSource.getString(R.string.forecast_description_label)
-	}
-
-	override fun getMaxTemperatureDescriptionLabel(): String {
-		return resourceDataSource.getString(R.string.max_temperature_description_label)
-	}
-
-	override fun getMinTemperatureDescriptionLabel(): String {
-		return resourceDataSource.getString(R.string.min_temperature_description_label)
-	}
-
-	override fun getPressureUnit(): String {
-		return resourceDataSource.getString(R.string.pressure_unit)
-	}
-
-	override fun getToday(): String {
-		return resourceDataSource.getString(R.string.today)
-	}
-
-	override fun getTomorrow(): String {
-		return resourceDataSource.getString(R.string.tomorrow)
-	}
-
-	override fun getWindSpeedUnitImperial(): String {
-		return resourceDataSource.getString(R.string.wind_speed_unit_imperial)
-	}
-
-	override fun getWindSpeedUnitMetric(): String {
-		return resourceDataSource.getString(R.string.wind_speed_unit_metric)
-	}
+  override fun getIconDescriptionLabel(): String {
+    return resourceDataSource.getString(R.string.icon_description_label)
+  }
+  
+  override fun getForecastDescriptionLabel(): String {
+    return resourceDataSource.getString(R.string.forecast_description_label)
+  }
+  
+  override fun getMaxTemperatureDescriptionLabel(): String {
+    return resourceDataSource.getString(R.string.max_temperature_description_label)
+  }
+  
+  override fun getMinTemperatureDescriptionLabel(): String {
+    return resourceDataSource.getString(R.string.min_temperature_description_label)
+  }
+  
+  override fun getPressureUnit(): String {
+    return resourceDataSource.getString(R.string.pressure_unit)
+  }
+  
+  override fun getToday(): String {
+    return resourceDataSource.getString(R.string.today)
+  }
+  
+  override fun getTomorrow(): String {
+    return resourceDataSource.getString(R.string.tomorrow)
+  }
+  
+  override fun getWindSpeedUnitImperial(): String {
+    return resourceDataSource.getString(R.string.wind_speed_unit_imperial)
+  }
+  
+  override fun getWindSpeedUnitMetric(): String {
+    return resourceDataSource.getString(R.string.wind_speed_unit_metric)
+  }
 }

@@ -17,13 +17,13 @@
 package constantine.theodoridis.app.sunshine.data.database.model
 
 data class WeatherForecastDatabaseModel(
-		val locationSettingId: Int,
-		val dateInMilliseconds: Long,
-		val weatherId: Int,
-		val maxTemperature: Float,
-		val minTemperature: Float,
-		val humidity: Float,
-		val pressure: Float,
-		val windSpeed: Float,
-		val windDegrees: Float
+  val locationSettingId: Int,
+  val dateInMilliseconds: Long,
+  val weatherId: Int,
+  val maxTemperature: Float,
+  val minTemperature: Float,
+  val humidity: Float,
+  val pressure: Float,
+  val windSpeed: Float,
+  val windDegrees: Float
 )

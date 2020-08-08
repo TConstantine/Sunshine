@@ -16,7 +16,9 @@
 
 package constantine.theodoridis.app.sunshine.data.model
 
-data class Location(val cityName: String,
-										val locationSetting: String,
-										val latitude: Float,
-										val longitude: Float)
+data class Location(
+  val cityName: String,
+  val locationSetting: String,
+  val latitude: Float,
+  val longitude: Float
+)

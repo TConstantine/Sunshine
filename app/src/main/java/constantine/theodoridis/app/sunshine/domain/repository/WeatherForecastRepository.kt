@@ -19,5 +19,5 @@ package constantine.theodoridis.app.sunshine.domain.repository
 import constantine.theodoridis.app.sunshine.domain.entity.WeatherForecast
 
 interface WeatherForecastRepository {
-	fun getWeatherForecast(location: String, date: Long): WeatherForecast
+  fun getWeatherForecast(location: String, date: Long): WeatherForecast
 }

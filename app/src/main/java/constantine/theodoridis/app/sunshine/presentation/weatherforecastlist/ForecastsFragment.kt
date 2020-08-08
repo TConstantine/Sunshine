@@ -27,7 +27,13 @@ import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.AttributeSet
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.AbsListView
 import android.widget.TextView
 import android.widget.Toast
@@ -54,7 +60,17 @@ class ForecastsFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>,
   SharedPreferences.OnSharedPreferenceChangeListener {
   companion object {
     private const val FORECAST_LOADER = 0
-    private val FORECAST_COLUMNS = arrayOf(WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry.ID, WeatherContract.WeatherEntry.COLUMN_DATE, WeatherContract.WeatherEntry.COLUMN_SHORT_DESC, WeatherContract.WeatherEntry.COLUMN_MAX_TEMP, WeatherContract.WeatherEntry.COLUMN_MIN_TEMP, WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, WeatherContract.WeatherEntry.COLUMN_WEATHER_ID, WeatherContract.LocationEntry.COLUMN_COORDINATE_LATITUDE, WeatherContract.LocationEntry.COLUMN_COORDINATE_LONGITUDE)
+    private val FORECAST_COLUMNS = arrayOf(
+      WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry.ID,
+      WeatherContract.WeatherEntry.COLUMN_DATE,
+      WeatherContract.WeatherEntry.COLUMN_SHORT_DESC,
+      WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+      WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+      WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+      WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
+      WeatherContract.LocationEntry.COLUMN_COORDINATE_LATITUDE,
+      WeatherContract.LocationEntry.COLUMN_COORDINATE_LONGITUDE
+    )
     internal const val COL_WEATHER_DATE = 1
     internal const val COL_WEATHER_MAX_TEMP = 3
     internal const val COL_WEATHER_MIN_TEMP = 4

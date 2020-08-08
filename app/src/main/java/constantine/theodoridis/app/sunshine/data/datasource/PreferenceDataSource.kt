@@ -17,5 +17,5 @@
 package constantine.theodoridis.app.sunshine.data.datasource
 
 interface PreferenceDataSource {
-	fun getString(key: String, defaultKey: String): String?
+  fun getString(key: String, defaultKey: String): String?
 }
